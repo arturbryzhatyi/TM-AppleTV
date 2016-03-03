@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="DQY-gV-iFG">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--MENU-->
@@ -15,7 +16,93 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retina-wallpaper-photo-lrv" translatesAutoresizingMaskIntoConstraints="NO" id="JLg-Tn-J6m">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dts-Sz-OCb">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AAf-Yd-Q9l">
+                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w16-eS-y0G">
+                                            <rect key="frame" x="15" y="10" width="1890" height="1060"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="20" id="Hcs-db-ycw">
+                                                <size key="itemSize" width="400" height="220"/>
+                                                <size key="headerReferenceSize" width="50" height="300"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="conetentCell" id="PZ7-b6-fGM" customClass="ContentViewCell">
+                                                    <rect key="frame" x="0.0" y="300" width="400" height="220"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="220"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retina-wallpaper-photo-lrv" translatesAutoresizingMaskIntoConstraints="NO" id="hjA-xe-xxR">
+                                                                <rect key="frame" x="0.0" y="0.0" width="400" height="220"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="hjA-xe-xxR" secondAttribute="bottom" id="KsF-df-QPH"/>
+                                                        <constraint firstItem="hjA-xe-xxR" firstAttribute="top" secondItem="PZ7-b6-fGM" secondAttribute="top" id="gKt-oz-ntT"/>
+                                                        <constraint firstAttribute="trailing" secondItem="hjA-xe-xxR" secondAttribute="trailing" id="gpP-qs-GNF"/>
+                                                        <constraint firstItem="hjA-xe-xxR" firstAttribute="leading" secondItem="PZ7-b6-fGM" secondAttribute="leading" id="sZ8-GP-rvI"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="imageView" destination="hjA-xe-xxR" id="FIs-w8-fgu"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerContentView" id="ze8-mn-F14" customClass="ContentReusableView">
+                                                <rect key="frame" x="0.0" y="0.0" width="1890" height="300"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pod-vodoy-gorod-meduza-kupol" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxt-Uy-PSX">
+                                                        <rect key="frame" x="520" y="50" width="850" height="200"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="850" id="SdM-PL-pWZ"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="gxt-Uy-PSX" firstAttribute="centerY" secondItem="ze8-mn-F14" secondAttribute="centerY" id="1Gg-c8-Ta2"/>
+                                                    <constraint firstItem="gxt-Uy-PSX" firstAttribute="centerX" secondItem="ze8-mn-F14" secondAttribute="centerX" id="2bE-iR-MnN"/>
+                                                    <constraint firstItem="gxt-Uy-PSX" firstAttribute="height" secondItem="ze8-mn-F14" secondAttribute="height" multiplier="1:1.5" id="sra-Xr-7fn"/>
+                                                </constraints>
+                                            </collectionReusableView>
+                                            <connections>
+                                                <outlet property="dataSource" destination="BYZ-38-t0r" id="egc-Ob-V8W"/>
+                                                <outlet property="delegate" destination="BYZ-38-t0r" id="u0O-yn-fmp"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="w16-eS-y0G" secondAttribute="trailing" constant="15" id="Zv9-Uc-q4X"/>
+                                        <constraint firstItem="w16-eS-y0G" firstAttribute="leading" secondItem="AAf-Yd-Q9l" secondAttribute="leading" constant="15" id="djv-qN-Hoa"/>
+                                        <constraint firstAttribute="bottom" secondItem="w16-eS-y0G" secondAttribute="bottom" constant="10" id="fgk-0F-k1o"/>
+                                        <constraint firstItem="w16-eS-y0G" firstAttribute="top" secondItem="AAf-Yd-Q9l" secondAttribute="top" constant="10" id="nkg-oD-BqV"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JLg-Tn-J6m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Dd8-6l-BXP"/>
+                            <constraint firstAttribute="trailing" secondItem="JLg-Tn-J6m" secondAttribute="trailing" id="IcF-rW-LEi"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dts-Sz-OCb" secondAttribute="bottom" id="KdQ-Wo-ska"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="JLg-Tn-J6m" secondAttribute="bottom" id="WYD-j6-rYI"/>
+                            <constraint firstItem="dts-Sz-OCb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eJC-Fk-b4q"/>
+                            <constraint firstItem="JLg-Tn-J6m" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fFi-6F-tCN"/>
+                            <constraint firstAttribute="trailing" secondItem="dts-Sz-OCb" secondAttribute="trailing" id="kdW-Lk-bEY"/>
+                            <constraint firstItem="dts-Sz-OCb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n3j-Bz-uWY"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="MENU" id="vbN-3T-Xze"/>
                 </viewController>
@@ -23,22 +110,9 @@
             </objects>
             <point key="canvasLocation" x="2409" y="429"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="cvC-hL-b4b">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="DQY-gV-iFG" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="xzV-qS-JNr">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="g2H-ul-rdl"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8FT-Qs-9Z5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="277" y="429"/>
-        </scene>
     </scenes>
+    <resources>
+        <image name="pod-vodoy-gorod-meduza-kupol" width="1920" height="1200"/>
+        <image name="retina-wallpaper-photo-lrv" width="1440" height="900"/>
+    </resources>
 </document>

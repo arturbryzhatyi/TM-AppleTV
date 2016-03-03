@@ -10,4 +10,8 @@
 
 @interface Core : NSObject
 
++ (instancetype)sharedInstance;
+
+- (void)searchKey:(NSString *)keyword success:(void (^)(id object))successBlock;
+
 @end

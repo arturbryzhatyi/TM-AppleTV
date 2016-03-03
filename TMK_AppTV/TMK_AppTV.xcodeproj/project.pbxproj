@@ -14,6 +14,9 @@
 		9054FF921C85A285003449B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF901C85A285003449B7 /* Main.storyboard */; };
 		9054FF941C85A285003449B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF931C85A285003449B7 /* Assets.xcassets */; };
 		90D913781C870AF0005E5972 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913771C870AF0005E5972 /* Core.m */; };
+		90D9137E1C870CC4005E5972 /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9137D1C870CC4005E5972 /* HTTPClient.m */; };
+		90D913851C872F32005E5972 /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913841C872F32005E5972 /* ContentViewCell.m */; };
+		90D9138A1C8730D8005E5972 /* ContentReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913891C8730D8005E5972 /* ContentReusableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,12 @@
 		9054FF951C85A285003449B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90D913761C870AF0005E5972 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
 		90D913771C870AF0005E5972 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
+		90D9137C1C870CC4005E5972 /* HTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPClient.h; sourceTree = "<group>"; };
+		90D9137D1C870CC4005E5972 /* HTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPClient.m; sourceTree = "<group>"; };
+		90D913831C872F32005E5972 /* ContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewCell.h; sourceTree = "<group>"; };
+		90D913841C872F32005E5972 /* ContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewCell.m; sourceTree = "<group>"; };
+		90D913881C8730D8005E5972 /* ContentReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentReusableView.h; sourceTree = "<group>"; };
+		90D913891C8730D8005E5972 /* ContentReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentReusableView.m; sourceTree = "<group>"; };
 		992292AEB8DF980C0D691F74 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E3376DDED2159C16291D2C62 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,12 +92,12 @@
 		9054FF861C85A285003449B7 /* TMK_AppTV */ = {
 			isa = PBXGroup;
 			children = (
-				90D913751C870ABE005E5972 /* ViewController */,
-				90D913741C870AB1005E5972 /* Core */,
 				9054FF8A1C85A285003449B7 /* AppDelegate.h */,
 				9054FF8B1C85A285003449B7 /* AppDelegate.m */,
-				9054FF901C85A285003449B7 /* Main.storyboard */,
 				9054FF931C85A285003449B7 /* Assets.xcassets */,
+				90D913741C870AB1005E5972 /* Core */,
+				90D913751C870ABE005E5972 /* ViewController */,
+				9054FF901C85A285003449B7 /* Main.storyboard */,
 				9054FF951C85A285003449B7 /* Info.plist */,
 				9054FF871C85A285003449B7 /* Supporting Files */,
 			);
@@ -106,11 +115,11 @@
 		90D913741C870AB1005E5972 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				90D9137B1C870B10005E5972 /* HttpClient */,
-				90D9137A1C870B03005E5972 /* ParseManager */,
-				90D913791C870AF3005E5972 /* DataBaseManager */,
 				90D913761C870AF0005E5972 /* Core.h */,
 				90D913771C870AF0005E5972 /* Core.m */,
+				90D913791C870AF3005E5972 /* DataBaseManager */,
+				90D9137B1C870B10005E5972 /* HttpClient */,
+				90D9137A1C870B03005E5972 /* ParseManager */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -118,6 +127,8 @@
 		90D913751C870ABE005E5972 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				90D913871C8730A8005E5972 /* view */,
+				90D9137F1C871973005E5972 /* cell */,
 				9054FF8D1C85A285003449B7 /* ViewController.h */,
 				9054FF8E1C85A285003449B7 /* ViewController.m */,
 			);
@@ -141,8 +152,28 @@
 		90D9137B1C870B10005E5972 /* HttpClient */ = {
 			isa = PBXGroup;
 			children = (
+				90D9137C1C870CC4005E5972 /* HTTPClient.h */,
+				90D9137D1C870CC4005E5972 /* HTTPClient.m */,
 			);
 			path = HttpClient;
+			sourceTree = "<group>";
+		};
+		90D9137F1C871973005E5972 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				90D913831C872F32005E5972 /* ContentViewCell.h */,
+				90D913841C872F32005E5972 /* ContentViewCell.m */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		90D913871C8730A8005E5972 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				90D913881C8730D8005E5972 /* ContentReusableView.h */,
+				90D913891C8730D8005E5972 /* ContentReusableView.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,8 +297,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9054FF8F1C85A285003449B7 /* ViewController.m in Sources */,
+				90D9138A1C8730D8005E5972 /* ContentReusableView.m in Sources */,
 				9054FF8C1C85A285003449B7 /* AppDelegate.m in Sources */,
+				90D913851C872F32005E5972 /* ContentViewCell.m in Sources */,
 				90D913781C870AF0005E5972 /* Core.m in Sources */,
+				90D9137E1C870CC4005E5972 /* HTTPClient.m in Sources */,
 				9054FF891C85A285003449B7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +410,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.miraving.TMK-AppTV";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Debug;
 		};
@@ -389,6 +424,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.miraving.TMK-AppTV";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Release;
 		};
