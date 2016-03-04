@@ -10,8 +10,8 @@
 //#import <AFNetworkActivityIndicatorManager.h>
 
 NSString * const devKey = @"7elxdku9GGG5k8j0Xm8KWdANDgecHMV0";
-//NSString * const apiVersion = @"v1";
-NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v1";
+//NSString * const apiVersion = @"v2";
+NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v2";
 
 @implementation HTTPClient
 
@@ -32,7 +32,11 @@ NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v1";
     [self GET:@"events.json" parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSLog(@"URL: %@", task.response.URL);
-        NSLog(@"Success: %@", responseObject);
+//        NSLog(@"Success: %@", responseObject);
+        if (success)
+        {
+            success(responseObject);
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

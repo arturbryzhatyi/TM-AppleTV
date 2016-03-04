@@ -18,7 +18,6 @@
 {
     [super awakeFromNib];
     
-    
     self.imageView.userInteractionEnabled = YES;
     self.imageView.adjustsImageWhenAncestorFocused = YES;
 }

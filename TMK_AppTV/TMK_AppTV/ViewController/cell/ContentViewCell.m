@@ -8,9 +8,8 @@
 
 #import "ContentViewCell.h"
 
-@interface ContentViewCell ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@end
+//@interface ContentViewCell ()
+//@end
 
 @implementation ContentViewCell
 
@@ -20,12 +19,6 @@
     
     self.imageView.userInteractionEnabled = YES;
     self.imageView.adjustsImageWhenAncestorFocused = YES;
-}
-
-- (void)setNeedsFocusUpdate
-{
-    [super setNeedsFocusUpdate];
-
 }
 
 - (void)setSelected:(BOOL)selected

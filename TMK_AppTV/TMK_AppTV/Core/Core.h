@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DatabaseManager.h"
 
 @interface Core : NSObject
+@property (nonatomic, strong, readonly) DatabaseManager *databaseManager;
 
 + (instancetype)sharedInstance;
 

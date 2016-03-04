@@ -8,7 +8,7 @@
 
 #import "Core.h"
 #import "HTTPClient.h"
-
+#import "ParserManager.h"
 
 @interface Core()
 @property (nonatomic, strong) HTTPClient *httpclient;
@@ -34,6 +34,7 @@
     if (self)
     {
         self.httpclient = [[HTTPClient alloc] initDefaultHttpClient];
+        _databaseManager = [[DatabaseManager alloc] init];
     }
     return self;
 }
@@ -43,10 +44,13 @@
 {
     [self.httpclient searchWithKeyword:keyword success:^(id responseObject) {
         
-        if (successBlock)
-        {
-            successBlock(responseObject);
-        }
+        [ParserManager parseEventJSON:responseObject success:^(id objects) {
+            
+            if (successBlock)
+            {
+                successBlock(objects);
+            }
+        }];
         
     } failure:^(NSError *error) {
         

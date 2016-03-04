@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ContentViewCell : UICollectionViewCell
-
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @end

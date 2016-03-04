@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="CategoryItem" representedClassName="CategoryItem" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="event" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="category" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="images" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="localDateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryItem" inverseName="event" inverseEntity="CategoryItem" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Event" positionX="198" positionY="-150" width="128" height="118"/>
+        <element name="CategoryItem" positionX="-54" positionY="18" width="128" height="88"/>
+    </elements>
+</model>

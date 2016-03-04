@@ -13,6 +13,15 @@
 		9054FF8F1C85A285003449B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9054FF8E1C85A285003449B7 /* ViewController.m */; };
 		9054FF921C85A285003449B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF901C85A285003449B7 /* Main.storyboard */; };
 		9054FF941C85A285003449B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF931C85A285003449B7 /* Assets.xcassets */; };
+		90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90877E9C1C898625004F8C52 /* TMKAppTV.xcdatamodeld */; };
+		90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EAD1C89888B004F8C52 /* DatabaseManager.m */; };
+		90877EBD1C898996004F8C52 /* CategoryItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EB61C898996004F8C52 /* CategoryItem+CoreDataProperties.m */; };
+		90877EBE1C898996004F8C52 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EB81C898996004F8C52 /* CategoryItem.m */; };
+		90877EBF1C898996004F8C52 /* Event+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EBA1C898996004F8C52 /* Event+CoreDataProperties.m */; };
+		90877EC01C898996004F8C52 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EBC1C898996004F8C52 /* Event.m */; };
+		90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */; };
+		90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC61C89C0A4004F8C52 /* DetailViewController.m */; };
+		908993111C888B0A005ABDA3 /* ParserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 908993101C888B0A005ABDA3 /* ParserManager.m */; };
 		90D913781C870AF0005E5972 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913771C870AF0005E5972 /* Core.m */; };
 		90D9137E1C870CC4005E5972 /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D9137D1C870CC4005E5972 /* HTTPClient.m */; };
 		90D913851C872F32005E5972 /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913841C872F32005E5972 /* ContentViewCell.m */; };
@@ -30,6 +39,23 @@
 		9054FF911C85A285003449B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9054FF931C85A285003449B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9054FF951C85A285003449B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90877E9D1C898625004F8C52 /* TMKAppTV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TMKAppTV.xcdatamodel; sourceTree = "<group>"; };
+		90877EAC1C89888B004F8C52 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
+		90877EAD1C89888B004F8C52 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
+		90877EB51C898996004F8C52 /* CategoryItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CategoryItem+CoreDataProperties.h"; sourceTree = "<group>"; };
+		90877EB61C898996004F8C52 /* CategoryItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CategoryItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		90877EB71C898996004F8C52 /* CategoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItem.h; sourceTree = "<group>"; };
+		90877EB81C898996004F8C52 /* CategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItem.m; sourceTree = "<group>"; };
+		90877EB91C898996004F8C52 /* Event+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CoreDataProperties.h"; sourceTree = "<group>"; };
+		90877EBA1C898996004F8C52 /* Event+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CoreDataProperties.m"; sourceTree = "<group>"; };
+		90877EBB1C898996004F8C52 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		90877EBC1C898996004F8C52 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		90877EC11C898D49004F8C52 /* NSManagedObject+extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+extension.h"; sourceTree = "<group>"; };
+		90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+extension.m"; sourceTree = "<group>"; };
+		90877EC51C89C0A4004F8C52 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		90877EC61C89C0A4004F8C52 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		9089930F1C888B0A005ABDA3 /* ParserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserManager.h; sourceTree = "<group>"; };
+		908993101C888B0A005ABDA3 /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserManager.m; sourceTree = "<group>"; };
 		90D913761C870AF0005E5972 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
 		90D913771C870AF0005E5972 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
 		90D9137C1C870CC4005E5972 /* HTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPClient.h; sourceTree = "<group>"; };
@@ -97,6 +123,7 @@
 				9054FF931C85A285003449B7 /* Assets.xcassets */,
 				90D913741C870AB1005E5972 /* Core */,
 				90D913751C870ABE005E5972 /* ViewController */,
+				90877EC41C89C081004F8C52 /* DetailViewController */,
 				9054FF901C85A285003449B7 /* Main.storyboard */,
 				9054FF951C85A285003449B7 /* Info.plist */,
 				9054FF871C85A285003449B7 /* Supporting Files */,
@@ -110,6 +137,30 @@
 				9054FF881C85A285003449B7 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		90877E9F1C89882D004F8C52 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				90877EB51C898996004F8C52 /* CategoryItem+CoreDataProperties.h */,
+				90877EB61C898996004F8C52 /* CategoryItem+CoreDataProperties.m */,
+				90877EB71C898996004F8C52 /* CategoryItem.h */,
+				90877EB81C898996004F8C52 /* CategoryItem.m */,
+				90877EB91C898996004F8C52 /* Event+CoreDataProperties.h */,
+				90877EBA1C898996004F8C52 /* Event+CoreDataProperties.m */,
+				90877EBB1C898996004F8C52 /* Event.h */,
+				90877EBC1C898996004F8C52 /* Event.m */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		90877EC41C89C081004F8C52 /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				90877EC51C89C0A4004F8C52 /* DetailViewController.h */,
+				90877EC61C89C0A4004F8C52 /* DetailViewController.m */,
+			);
+			path = DetailViewController;
 			sourceTree = "<group>";
 		};
 		90D913741C870AB1005E5972 /* Core */ = {
@@ -138,6 +189,12 @@
 		90D913791C870AF3005E5972 /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
+				90877EC11C898D49004F8C52 /* NSManagedObject+extension.h */,
+				90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */,
+				90877E9F1C89882D004F8C52 /* Entity */,
+				90877E9C1C898625004F8C52 /* TMKAppTV.xcdatamodeld */,
+				90877EAC1C89888B004F8C52 /* DatabaseManager.h */,
+				90877EAD1C89888B004F8C52 /* DatabaseManager.m */,
 			);
 			path = DataBaseManager;
 			sourceTree = "<group>";
@@ -145,6 +202,8 @@
 		90D9137A1C870B03005E5972 /* ParseManager */ = {
 			isa = PBXGroup;
 			children = (
+				9089930F1C888B0A005ABDA3 /* ParserManager.h */,
+				908993101C888B0A005ABDA3 /* ParserManager.m */,
 			);
 			path = ParseManager;
 			sourceTree = "<group>";
@@ -298,10 +357,19 @@
 			files = (
 				9054FF8F1C85A285003449B7 /* ViewController.m in Sources */,
 				90D9138A1C8730D8005E5972 /* ContentReusableView.m in Sources */,
+				90877EBE1C898996004F8C52 /* CategoryItem.m in Sources */,
+				90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */,
+				908993111C888B0A005ABDA3 /* ParserManager.m in Sources */,
 				9054FF8C1C85A285003449B7 /* AppDelegate.m in Sources */,
 				90D913851C872F32005E5972 /* ContentViewCell.m in Sources */,
+				90877EC01C898996004F8C52 /* Event.m in Sources */,
+				90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */,
 				90D913781C870AF0005E5972 /* Core.m in Sources */,
+				90877EBF1C898996004F8C52 /* Event+CoreDataProperties.m in Sources */,
 				90D9137E1C870CC4005E5972 /* HTTPClient.m in Sources */,
+				90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */,
+				90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */,
+				90877EBD1C898996004F8C52 /* CategoryItem+CoreDataProperties.m in Sources */,
 				9054FF891C85A285003449B7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +518,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		90877E9C1C898625004F8C52 /* TMKAppTV.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				90877E9D1C898625004F8C52 /* TMKAppTV.xcdatamodel */,
+			);
+			currentVersion = 90877E9D1C898625004F8C52 /* TMKAppTV.xcdatamodel */;
+			path = TMKAppTV.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9054FF7C1C85A285003449B7 /* Project object */;
 }
