@@ -26,7 +26,7 @@ NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v2";
 - (void)searchWithKeyword:(NSString *)keyword success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *param = @{@"keyword": keyword,
-                            @"size": @10,
+                            @"size": @100,
                             @"apikey": devKey};
     
     [self GET:@"events.json" parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

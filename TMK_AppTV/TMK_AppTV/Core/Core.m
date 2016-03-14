@@ -12,6 +12,7 @@
 
 @interface Core()
 @property (nonatomic, strong) HTTPClient *httpclient;
+@property (nonatomic, strong) ParserManager *parserManager;
 @end
 
 @implementation Core
@@ -34,7 +35,9 @@
     if (self)
     {
         self.httpclient = [[HTTPClient alloc] initDefaultHttpClient];
+        self.parserManager = [[ParserManager alloc] init];
         _databaseManager = [[DatabaseManager alloc] init];
+        
     }
     return self;
 }
@@ -44,7 +47,7 @@
 {
     [self.httpclient searchWithKeyword:keyword success:^(id responseObject) {
         
-        [ParserManager parseEventJSON:responseObject success:^(id objects) {
+        [self.parserManager parseEventJSON:responseObject success:^(id objects) {
             
             if (successBlock)
             {

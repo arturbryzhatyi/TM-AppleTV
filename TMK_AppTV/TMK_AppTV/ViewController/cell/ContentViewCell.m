@@ -8,8 +8,9 @@
 
 #import "ContentViewCell.h"
 
-//@interface ContentViewCell ()
-//@end
+@interface ContentViewCell ()
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@end
 
 @implementation ContentViewCell
 

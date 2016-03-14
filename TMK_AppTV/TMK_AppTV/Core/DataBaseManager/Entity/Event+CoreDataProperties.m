@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.m
 //  TMK_AppTV
 //
-//  Created by Vitalii Obertynskyi on 3/4/16.
+//  Created by Vitalii Obertynskyi on 3/14/16.
 //  Copyright © 2016 Vitalii Obertynskyi. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,9 +14,10 @@
 @implementation Event (CoreDataProperties)
 
 @dynamic id;
-@dynamic name;
-@dynamic localDateTime;
 @dynamic images;
-@dynamic category;
+@dynamic localDateTime;
+@dynamic name;
+@dynamic genres;
+@dynamic segment;
 
 @end

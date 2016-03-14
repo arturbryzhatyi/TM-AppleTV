@@ -12,7 +12,7 @@
 
 @implementation ParserManager
 
-+ (void)parseEventJSON:(NSDictionary *)dict success:(void(^)(id objects))success
+- (void)parseEventJSON:(NSDictionary *)dict success:(void(^)(id objects))success
 {
     NSMutableArray *mArr = [NSMutableArray new];
     
@@ -21,12 +21,13 @@
         NSArray *events = dict[@"_embedded"][@"events"];
         IfArrayValueNotNull(events)
         {
+            DatabaseManager *dataManager = [Core sharedInstance].databaseManager;
+
             for (NSDictionary *object in events)
             {
                 id value = object[@"id"];
                 IfStringValueNotNull(value)
                 {
-                    DatabaseManager *dataManager = [Core sharedInstance].databaseManager;
                     
                     NSSet *searchResult = [dataManager fetchObjectsForEntityName:@"Event"
                                                                                     withPredicate:[NSPredicate predicateWithFormat:@"id == %@", value]];
@@ -80,11 +81,58 @@
                         }
                     }
                     
-                    [dataManager saveContext];
+                    value = object[@"classifications"];
+                    IfArrayValueNotNull(value)
+                    {
+                        for (NSDictionary *dict in value)
+                        {
+                            if (dict[@"genre"])
+                            {
+                                Genre *genre = [self getGenreWithID:dict[@"genre"][@"id"]];
+                                if (genre == nil)
+                                {
+                                    genre = [Genre insertInManagedObjectContext:dataManager.managedObjectContext];
+                                    genre.id = dict[@"genre"][@"id"];
+                                    genre.name = dict[@"genre"][@"name"];
+                                }
+                                
+                                [nEvent addGenresObject:genre];
+                            }
+                            
+                            if (dict[@"segment"])
+                            {
+                                Segment *segment = [self getSegmentWithID:dict[@"segment"][@"id"]];
+                                if (segment == nil)
+                                {
+                                    segment = [Segment insertInManagedObjectContext:dataManager.managedObjectContext];
+                                    segment.id = dict[@"segment"][@"id"];
+                                    segment.name = dict[@"segment"][@"name"];
+                                }
+                                
+                                nEvent.segment = segment;
+                            }
+                            
+                            if (dict[@"subGenre"])
+                            {
+                                Genre *genre = [self getGenreWithID:dict[@"subGenre"][@"id"]];
+                                if (genre == nil)
+                                {
+                                    genre = [Genre insertInManagedObjectContext:dataManager.managedObjectContext];
+                                    genre.id = dict[@"subGenre"][@"id"];
+                                    genre.name = dict[@"subGenre"][@"name"];
+                                }
+                                
+                                [nEvent addGenresObject:genre];
+                            }
+                        }
+                    }
                     
                     [mArr addObject:nEvent];
                 }
+                
             }
+            
+            [dataManager saveContext];
         }
     }
     
@@ -92,6 +140,30 @@
     {
         success([NSArray arrayWithArray:mArr]);
     }
+}
+
+- (Segment *)getSegmentWithID:(NSString *)objectID
+{
+    NSSet *set = [[[Core sharedInstance] databaseManager] fetchObjectsForEntityName:@"Segment" withPredicate:[NSPredicate predicateWithFormat:@"id == %@", objectID]];
+    
+    if ([set count] > 0)
+    {
+        return set.allObjects.firstObject;
+    }
+    
+    return nil;
+}
+
+- (Genre *)getGenreWithID:(NSString *)objectID
+{
+    NSSet *set = [[[Core sharedInstance] databaseManager] fetchObjectsForEntityName:@"Genre" withPredicate:[NSPredicate predicateWithFormat:@"id == %@", objectID]];
+    
+    if ([set count] > 0)
+    {
+        return set.allObjects.firstObject;
+    }
+    
+    return nil;
 }
 
 @end

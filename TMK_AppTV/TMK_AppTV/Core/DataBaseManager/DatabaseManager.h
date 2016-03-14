@@ -10,7 +10,8 @@
 #import <CoreData/CoreData.h>
 
 #import "Event.h"
-#import "CategoryItem.h"
+#import "Segment.h"
+#import "Genre.h"
 
 
 @interface DatabaseManager : NSObject

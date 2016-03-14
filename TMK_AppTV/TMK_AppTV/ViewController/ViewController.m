@@ -9,10 +9,13 @@
 #import "ViewController.h"
 #import "Core.h"
 #import "ContentViewCell.h"
-#import "ContentReusableView.h"
+#import "CarouselView.h"
+#import "CategoryReusableView.h"
 #import <UIImageView+AFNetworking.h>
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *blurImageView;
+@property (weak, nonatomic) IBOutlet CarouselView *caruselView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -23,10 +26,16 @@
 {
     [super viewDidLoad];
 
-    [[Core sharedInstance] searchKey:@"Event" success:^(id object) {
+    [[Core sharedInstance] searchKey:@"LA" success:^(id object) {
         
-//        NSLog(@">>> %@", object);
+        NSLog(@">>> %@", object);
+        
+        [self.caruselView setObjects:object];
     }];
+    
+    NSSet *set = [[Core sharedInstance].databaseManager fetchObjectsForEntityName:@"Event" withPredicate:nil];
+    [self.caruselView setObjects:set.allObjects];
+    [self setBlur:set.anyObject];
 }
 
 - (UIView *)preferredFocusedView
@@ -34,33 +43,55 @@
     return self.collectionView;
 }
 
+- (void)setBlur:(Event *)event
+{
+    if (event)
+    {
+        [self.blurImageView setImageWithURL:event.imageURL];
+    }
+}
+
 #pragma mark - Collection view data source
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return [[self.fetchedResultsController sections] count];
+    NSInteger intCount = [[self.fetchedResultsController sections] count];
+    return intCount;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     id  sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     NSInteger count = [sectionInfo numberOfObjects];
+    
+    Segment *segm = [self.fetchedResultsController fetchedObjects][section];
+    
+    count = segm.event.count;
+    
+    if (count > 4)
+    {
+        count = 4;
+    }
+    
     return count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        return CGSizeMake(0, 450);
-    }
-    
-    return CGSizeZero;
+    return CGSizeMake(0, 50);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    ContentReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerContentView" forIndexPath:indexPath];
+    CategoryReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"categoryReusableView" forIndexPath:indexPath];
     
+    Segment *seg = self.fetchedResultsController.fetchedObjects[indexPath.section];
+    
+    if (indexPath.section == 0)
+    {
+        [self setBlur:seg.event.anyObject];
+    }
+    
+    [view.titleLabel setText:seg.name];
 
     return view;
 }
@@ -69,12 +100,19 @@
 {
     ContentViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"conetentCell" forIndexPath:indexPath];
     
-    Event *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [cell.textLabel setText:[item name]];
-    [cell.imageView setImageWithURL:item.imageURL];
+    [self configureCell:cell withIndexPath:indexPath];
     
     return cell;
+}
+
+- (void)configureCell:(ContentViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
+{
+    Segment *item = [self.fetchedResultsController fetchedObjects][indexPath.section];
+    
+    Event *e = item.event.allObjects[indexPath.row];
+    
+    [cell.textLabel setText:[e name]];
+    [cell.imageView setImageWithURL:e.imageURL];
 }
 
 #pragma mark - Collection view flow layout
@@ -125,22 +163,29 @@
     NSManagedObjectContext *managedContext = [[Core sharedInstance].databaseManager managedObjectContext];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:managedContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Segment" inManagedObjectContext:managedContext];
     [fetchRequest setEntity:entity];
     
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"localDateTime" ascending:NO];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:@[sort]];
-    [fetchRequest setFetchLimit:8];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"event.@count >= 4"];
+    fetchRequest.predicate = predicate;
     
     [NSFetchedResultsController deleteCacheWithName:@"cache"];
     
     NSFetchedResultsController *theFRController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:managedContext
-                                          sectionNameKeyPath:nil
+                                          sectionNameKeyPath:@"name"
                                                    cacheName:@"cache"];
-    
-    [theFRController performFetch:nil];
+    NSError *err = nil;
+    [theFRController performFetch:&err];
+    if (err)
+    {
+        NSLog(@"Error: %@", err.localizedDescription);
+        abort();
+    }
     [theFRController setDelegate:self];
     
     _fetchedResultsController = theFRController;
@@ -150,20 +195,14 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath
 {
+//    return;
     switch (type)
     {
+        case NSFetchedResultsChangeDelete:
+        case NSFetchedResultsChangeInsert:
         case NSFetchedResultsChangeUpdate:
         {
-            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
-        }
-        case NSFetchedResultsChangeDelete:
-        {
-            [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-            break;
-        }
-        case NSFetchedResultsChangeInsert:
-        {
-            [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            [self collectionView:self.collectionView cellForItemAtIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove:
@@ -176,11 +215,4 @@
 }
 
 @end
-
-
-
-
-
-
-
 

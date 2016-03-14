@@ -19,6 +19,6 @@
 
 @interface ParserManager : NSObject
 
-+ (void)parseEventJSON:(NSDictionary *)dict success:(void(^)(id objects))success;
+- (void)parseEventJSON:(NSDictionary *)dict success:(void(^)(id objects))success;
 
 @end
