@@ -8,15 +8,14 @@
 
 #import "ViewController.h"
 #import "Core.h"
-#import "ContentViewCell.h"
+#import "TableViewCell.h"
 #import "CarouselView.h"
-#import "CategoryReusableView.h"
 #import <UIImageView+AFNetworking.h>
 
-@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *blurImageView;
 @property (weak, nonatomic) IBOutlet CarouselView *caruselView;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
@@ -26,7 +25,7 @@
 {
     [super viewDidLoad];
 
-    [[Core sharedInstance] searchKey:@"LA" success:^(id object) {
+    [[Core sharedInstance] searchKey:@"fear+the" success:^(id object) {
         
         NSLog(@">>> %@", object);
         
@@ -40,7 +39,7 @@
 
 - (UIView *)preferredFocusedView
 {
-    return self.collectionView;
+    return self.tableView;
 }
 
 - (void)setBlur:(Event *)event
@@ -51,107 +50,44 @@
     }
 }
 
-#pragma mark - Collection view data source
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+
+#pragma mark - Table view
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger intCount = [[self.fetchedResultsController sections] count];
-    return intCount;
+    return [[self.fetchedResultsController sections] count];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id  sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    
     NSInteger count = [sectionInfo numberOfObjects];
-    
-    Segment *segm = [self.fetchedResultsController fetchedObjects][section];
-    
-    count = segm.event.count;
-    
-    if (count > 4)
-    {
-        count = 4;
-    }
-    
+
     return count;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(0, 50);
+    Segment *item = [self.fetchedResultsController fetchedObjects][section];
+    
+    return item.name;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CategoryReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"categoryReusableView" forIndexPath:indexPath];
-    
-    Segment *seg = self.fetchedResultsController.fetchedObjects[indexPath.section];
-    
-    if (indexPath.section == 0)
-    {
-        [self setBlur:seg.event.anyObject];
-    }
-    
-    [view.titleLabel setText:seg.name];
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableCell"];
 
-    return view;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    ContentViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"conetentCell" forIndexPath:indexPath];
-    
-    [self configureCell:cell withIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
-- (void)configureCell:(ContentViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(TableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    Segment *item = [self.fetchedResultsController fetchedObjects][indexPath.section];
+    Segment *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    Event *e = item.event.allObjects[indexPath.row];
-    
-    [cell.textLabel setText:[e name]];
-    [cell.imageView setImageWithURL:e.imageURL];
-}
-
-#pragma mark - Collection view flow layout
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat width = [UIScreen mainScreen].bounds.size.width / 5;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height / 5;
-    return CGSizeMake(width, height);
-}
-
-#pragma mark - Collection view focus
-- (NSIndexPath *)indexPathForPreferredFocusedViewInCollectionView:(UICollectionView *)collectionView
-{
-    return [NSIndexPath indexPathForRow:0 inSection:0];
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canFocusItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
-{
-    ContentViewCell *cell = (ContentViewCell *)[collectionView cellForItemAtIndexPath:context.nextFocusedIndexPath];
-    [collectionView bringSubviewToFront:cell];
-    [cell.contentView layoutIfNeeded];
-    
-    return YES;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if (indexPath == collectionView.indexPathsForSelectedItems.firstObject)
-    {
-        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-        return NO;
-    }
-    return YES;
+    [cell setObjects:item.event.allObjects];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -193,26 +129,60 @@
     return _fetchedResultsController;
 }
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller;
+{
+    [self.tableView beginUpdates];
+}
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath
 {
-//    return;
-    switch (type)
-    {
-        case NSFetchedResultsChangeDelete:
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
         case NSFetchedResultsChangeInsert:
+        {
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeDelete:
+        {
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
         case NSFetchedResultsChangeUpdate:
         {
-            [self collectionView:self.collectionView cellForItemAtIndexPath:indexPath];
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         }
         case NSFetchedResultsChangeMove:
         {
-            [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-            [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
     }
 }
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type;
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+}
 @end
 

@@ -11,4 +11,8 @@
 @interface ContentViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+
+- (void)setSlideImagesURL:(NSArray *)urlArray;
+
 @end

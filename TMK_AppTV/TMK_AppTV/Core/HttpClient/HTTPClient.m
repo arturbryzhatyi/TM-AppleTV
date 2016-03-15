@@ -7,6 +7,7 @@
 //
 
 #import "HTTPClient.h"
+#import <AFImageDownloader.h>
 //#import <AFNetworkActivityIndicatorManager.h>
 
 NSString * const devKey = @"7elxdku9GGG5k8j0Xm8KWdANDgecHMV0";
@@ -41,6 +42,34 @@ NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v2";
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"Error: %@", error.localizedDescription);
+    }];
+}
+
+- (void)downlodImage:(NSString *)stringUrl success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
+{
+    
+    AFImageDownloader *imgDownloader = [AFImageDownloader defaultInstance];
+    
+    if (imgDownloader.sessionManager == nil)
+    {
+        [imgDownloader setSessionManager:self];
+    }
+//    [imgDownloader setDownloadPrioritizaton:AFImageDownloadPrioritizationLIFO];
+    
+    [imgDownloader downloadImageForURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:stringUrl]] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull responseObject) {
+        
+       if (success)
+       {
+           success(responseObject);
+       }
+        
+    } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        
+        NSLog(@"ERROR: %@", error.localizedDescription);
+        if (failure)
+        {
+            failure(error);
+        }
     }];
 }
 

@@ -8,6 +8,7 @@
 
 #import "Core.h"
 #import "HTTPClient.h"
+#import <AFImageDownloader.h>
 #import "ParserManager.h"
 
 @interface Core()
@@ -62,6 +63,22 @@
             successBlock(error);
         }
     }];
-    
+}
+
+- (void)downloadImage:(NSString *)stringURL success:(void (^)(id object))successBlock
+{
+    [self.httpclient downlodImage:stringURL success:^(id responseObject) {
+        
+        if (successBlock)
+        {
+            successBlock(responseObject);
+        }
+        
+    } failure:^(NSError *error) {
+        if (successBlock)
+        {
+            successBlock(nil);
+        }
+    }];
 }
 @end
