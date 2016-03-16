@@ -64,8 +64,18 @@
 {
     Event *e = _objects[indexPath.row];
     
+    [cell setEventID:e.id];
     [cell.textLabel setText:[e name]];
     [cell.imageView setImageWithURL:e.imageURL];
+    
+    NSInteger count = arc4random() % 100000 + 23;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [cell.likesLabel setText:[NSString stringWithFormat:@"❤️ %@", [formatter stringFromNumber:[NSNumber numberWithInteger:count]]]];
+    
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"MM/dd/yyyy"];
+    [cell.dateLabel setText:[formater stringFromDate:e.localDateTime]];
     
     [cell setSlideImagesURL:e.images];
 }

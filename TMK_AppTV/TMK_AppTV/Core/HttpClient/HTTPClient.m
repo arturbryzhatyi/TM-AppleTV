@@ -14,6 +14,11 @@ NSString * const devKey = @"7elxdku9GGG5k8j0Xm8KWdANDgecHMV0";
 //NSString * const apiVersion = @"v2";
 NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v2";
 
+NSString * const postalCode = @"90069";
+
+NSString * const latlong = @"34.061128,-118.312686";
+NSString * const radius = @"99";
+
 @implementation HTTPClient
 
 - (instancetype)initDefaultHttpClient
@@ -28,7 +33,11 @@ NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v2";
 {
     NSDictionary *param = @{@"keyword": keyword,
                             @"size": @100,
-                            @"apikey": devKey};
+                            @"apikey": devKey,
+//                            @"postalCode": postalCode
+                            @"latlong": latlong,
+                            @"radius": radius
+                            };
     
     [self GET:@"events.json" parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

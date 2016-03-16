@@ -9,12 +9,14 @@
 #import "ViewController.h"
 #import "Core.h"
 #import "TableViewCell.h"
+#import "ContentViewCell.h"
+#import "DetailViewController.h"
 #import "CarouselView.h"
 #import <UIImageView+AFNetworking.h>
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *blurImageView;
-@property (weak, nonatomic) IBOutlet CarouselView *caruselView;
+@property (weak, nonatomic) IBOutlet CarouselView *carouselView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -25,16 +27,35 @@
 {
     [super viewDidLoad];
 
-    [[Core sharedInstance] searchKey:@"fear+the" success:^(id object) {
+    [[Core sharedInstance] searchKey:@"mc" success:^(id object) {
         
         NSLog(@">>> %@", object);
         
-        [self.caruselView setObjects:object];
+//        NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
+//        [self.carouselView setObjects:set.allObjects];
     }];
     
-    NSSet *set = [[Core sharedInstance].databaseManager fetchObjectsForEntityName:@"Event" withPredicate:nil];
-    [self.caruselView setObjects:set.allObjects];
+    NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
+    [self.carouselView setObjects:set.allObjects];
     [self setBlur:set.anyObject];
+    
+    
+    // Handle remote button
+//    tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+//    tapRecognizer.allowedPressTypes = @[[NSNumber numberWithInteger:UIPressTypeMenu]];
+//    [self.view addGestureRecognizer:tapRecognizer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.carouselView resumeCarousel];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.carouselView stopCarousel];
 }
 
 - (UIView *)preferredFocusedView
@@ -50,9 +71,21 @@
     }
 }
 
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showDetail"])
+    {
+        NSString *eventID = [(ContentViewCell *)sender eventID];
+        if ([eventID length] > 0)
+        {
+            DetailViewController *controller = segue.destinationViewController;
+            [controller setEventID:eventID];
+        }
+    }
+}
 
 #pragma mark - Table view
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.fetchedResultsController sections] count];
@@ -87,7 +120,14 @@
 {
     Segment *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    [cell setObjects:item.event.allObjects];
+    NSArray *a = [item.event.allObjects sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        Event *e1 = obj1;
+        Event *e2 = obj2;
+        
+        return [e1.localDateTime compare:e2.localDateTime];
+    }];
+    
+    [cell setObjects:a];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -104,8 +144,9 @@
     
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:@[sort]];
+
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"event.@count >= 4"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"event.@count >= 1 && name != 'ARTS & THEATRE'"];
     fetchRequest.predicate = predicate;
     
     [NSFetchedResultsController deleteCacheWithName:@"cache"];
@@ -138,8 +179,8 @@
 {
     UITableView *tableView = self.tableView;
     
-    switch(type) {
-            
+    switch(type)
+    {
         case NSFetchedResultsChangeInsert:
         {
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -166,18 +207,22 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type;
 {
+    UITableView *tableView = self.tableView;
+    
     switch(type)
     {
         case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+        {
+            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
-            
+        }
         case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+        {
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
+        }
     }
 }
-
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {

@@ -29,7 +29,6 @@
     return instance;
 }
 
-
 - (instancetype)init
 {
     self = [super init];
@@ -54,6 +53,12 @@
             {
                 successBlock(objects);
             }
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+
+                [self.databaseManager removeOldEvents];
+            });
+            
         }];
         
     } failure:^(NSError *error) {
