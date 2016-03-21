@@ -16,4 +16,5 @@
 
 - (void)searchKey:(NSString *)keyword success:(void (^)(id object))successBlock;
 
+- (void)downloadImage:(NSString *)stringURL success:(void (^)(id object))successBlock;
 @end

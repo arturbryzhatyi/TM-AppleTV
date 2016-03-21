@@ -22,7 +22,10 @@
 
 - (void)saveContext;
 
+- (void)removeOldEvents;
+
 - (NSSet *)fetchObjectsForEntityName:(NSString *)newEntityName
                        withPredicate:(id)stringOrPredicate, ...;
 
+- (NSSet *)fetchUniqueObjectsForEntityName:(NSString *)newEntityName;
 @end
