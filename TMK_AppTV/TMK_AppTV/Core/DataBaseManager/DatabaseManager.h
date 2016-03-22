@@ -12,6 +12,7 @@
 #import "Event.h"
 #import "Segment.h"
 #import "Genre.h"
+#import "Venue.h"
 
 
 @interface DatabaseManager : NSObject
@@ -22,7 +23,10 @@
 
 - (void)saveContext;
 
+- (void)removeOldEvents;
+
 - (NSSet *)fetchObjectsForEntityName:(NSString *)newEntityName
                        withPredicate:(id)stringOrPredicate, ...;
 
+- (NSSet *)fetchUniqueObjectsForEntityName:(NSString *)newEntityName;
 @end

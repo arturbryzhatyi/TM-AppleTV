@@ -1,5 +1,5 @@
 //
-//  Event+CoreDataProperties.m
+//  Venue+CoreDataProperties.m
 //  TMK_AppTV
 //
 //  Created by Vitalii Obertynskyi on 3/21/16.
@@ -9,16 +9,18 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Event+CoreDataProperties.h"
+#import "Venue+CoreDataProperties.h"
 
-@implementation Event (CoreDataProperties)
+@implementation Venue (CoreDataProperties)
 
 @dynamic id;
-@dynamic images;
-@dynamic localDateTime;
+@dynamic cityName;
+@dynamic countryName;
+@dynamic latitude;
+@dynamic longitude;
 @dynamic name;
-@dynamic genres;
-@dynamic segment;
-@dynamic venue;
+@dynamic postalCode;
+@dynamic stateName;
+@dynamic events;
 
 @end

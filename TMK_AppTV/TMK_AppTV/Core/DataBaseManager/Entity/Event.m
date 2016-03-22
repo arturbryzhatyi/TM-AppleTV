@@ -18,6 +18,13 @@
     return tmp;
 }
 
+- (NSString *)genre
+{
+    NSArray *a = [[self genres] allObjects];
+    
+    return [(Genre *)a.firstObject name];
+}
+
 - (NSURL *)imageURL
 {
     NSArray *a = [self images];

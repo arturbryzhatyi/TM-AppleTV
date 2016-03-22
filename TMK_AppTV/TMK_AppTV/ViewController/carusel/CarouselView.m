@@ -1,5 +1,5 @@
 //
-//  CaruselView.m
+//  CarouselView.m
 //  TMK_AppTV
 //
 //  Created by Vitalii Obertynskyi on 3/14/16.
@@ -11,27 +11,58 @@
 #import <UIImageView+AFNetworking.h>
 #import "Event.h"
 
-#define kItemWidth 850.f
-#define kTime4Scroll 3
+#if DEBUG
+    #define kTime4Scroll 3
+#else
+    #define kTime4Scroll 5
+#endif
+
+
+#define kScreenItemsCount   3
+#define kSpaseBetweenItem    20
+
 
 @interface CarouselView ()
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (assign, getter=isRealod) BOOL reload;
+@property (nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, assign) CGFloat itemHeight;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation CarouselView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.itemWidth = ([UIScreen mainScreen].bounds.size.width / kScreenItemsCount) - kSpaseBetweenItem;
+    self.itemHeight = 350.f;
+}
 
 - (void)setObjects:(NSArray *)objects
 {
     if ([objects count] == 0)
         return;
-    
-    self.reload = YES;
 
-    if ([objects count] > 20)
-        objects = [objects subarrayWithRange:NSMakeRange(0, 20)];
+    if (self.timer)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     
-    CGFloat x = 0;
+    if ([objects count] > 20)
+    {
+        objects = [objects subarrayWithRange:NSMakeRange(0, 20)];
+    }
+
+//    objects = [objects sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//        Event *e1 = obj1;
+//        Event *e2 = obj2;
+//        
+//        return [e1.localDateTime compare:e2.localDateTime];
+//    }];
+    
+    CGFloat x = 10;
 
     NSArray *subViews = self.scrollView.subviews;
     for (UIView *view in subViews)
@@ -47,7 +78,7 @@
         {
             Event *event = obj;
             
-            CarouselItem *item = [[CarouselItem alloc] initWithFrame:CGRectMake(x, 0, kItemWidth, 350)];
+            CarouselItem *item = [[CarouselItem alloc] initWithFrame:CGRectMake(x, 0, _itemWidth, _itemHeight)];
             [item.titleLabel setText:event.name];
             [item.imageView setImageWithURL:event.imageURL];
             [self.scrollView addSubview:item];
@@ -56,30 +87,45 @@
             
             [item setCenter:CGPointMake(item.center.x, pointY)];
             
-            x += item.bounds.size.width + 20;
+            x += item.bounds.size.width + kSpaseBetweenItem;
         }
     }
     
     [self.scrollView setContentSize:CGSizeMake(x, 1)];
-    self.reload = NO;
-    [self startTimerScroll];
+    [self resumeCarousel];
+}
+
+- (void)resumeCarousel
+{
+    [self stopCarousel];
+    
+    if (self.scrollView.contentSize.width <= self.bounds.size.width)
+        return;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:kTime4Scroll target:self selector:@selector(startTimerScroll) userInfo:nil repeats:YES];
+}
+
+- (void)stopCarousel
+{
+    if (self.timer)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
 - (void)startTimerScroll
 {
-    if ([self isRealod])
-    {
-        return;
-    }
-    
     CGFloat s = self.scrollView.contentOffset.x;
-    if (s >= self.scrollView.contentSize.width - (kItemWidth*3))
+    if (s >= self.scrollView.contentSize.width - (_itemWidth * 4))
     {
         s = 0;
+        [self.scrollView setContentOffset:CGPointMake(s + _itemWidth + 20, 0) animated:NO];
     }
-    [self.scrollView setContentOffset:CGPointMake(s + kItemWidth + 20, 0) animated:YES];
-    
-    [self performSelector:@selector(startTimerScroll) withObject:nil afterDelay:kTime4Scroll];
+    else
+    {
+        [self.scrollView setContentOffset:CGPointMake(s + _itemWidth + 20, 0) animated:YES];
+    }    
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  CaruselView.h
+//  CarouselView.h
 //  TMK_AppTV
 //
 //  Created by Vitalii Obertynskyi on 3/14/16.
@@ -11,6 +11,9 @@
 @interface CarouselView : UIView
 
 - (void)setObjects:(NSArray *)objects;
+
+- (void)resumeCarousel;
+- (void)stopCarousel;
 
 @end
 

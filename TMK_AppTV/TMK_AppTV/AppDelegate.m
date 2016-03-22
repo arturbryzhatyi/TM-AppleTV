@@ -7,6 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import <FlickrKit.h>
+
+
+#define kFlickerApiKey @"a2e3789039074383ccca61edbc86313f"
+#define kFlickerSecret @"75c0ae39b1aad727"
+
 
 @interface AppDelegate ()
 
@@ -26,6 +32,8 @@
     [NSURLCache setSharedURLCache:sharedCache];
     // sleep needed for cache ((
     sleep(1);
+    
+    [[FlickrKit sharedFlickrKit] initializeWithAPIKey:kFlickerApiKey sharedSecret:kFlickerSecret];
     
     return YES;
 }

@@ -104,6 +104,22 @@
     }
 }
 
+- (void)removeOldEvents
+{
+    return;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"localDateTime < %@", [NSDate date]];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext]];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
+    for (Event *e in results)
+    {
+        NSLog(@"Remove e = %@", e.localDateTime);
+    }
+}
+
 - (NSSet *)fetchObjectsForEntityName:(NSString *)newEntityName
                        withPredicate:(id)stringOrPredicate, ...
 {
@@ -140,6 +156,28 @@
     }
     
     return [NSSet setWithArray:results];
+}
+
+- (NSSet *)fetchUniqueObjectsForEntityName:(NSString *)newEntityName
+{
+    NSEntityDescription *entity = [NSEntityDescription  entityForName:newEntityName inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:entity];
+//    [request setResultType:NSDictionaryResultType];
+    [request setReturnsDistinctResults:YES];
+    [request setPropertiesToFetch:@[@"name"]];
+    
+    // Execute the fetch.
+    
+    NSError *error = nil;
+    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
+    if (error != nil)
+    {
+        [NSException raise:NSGenericException format:@"%@", [error description]];
+    }
+    
+    return [NSSet setWithArray:objects];
 }
 
 @end

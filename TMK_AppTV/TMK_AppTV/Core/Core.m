@@ -8,7 +8,9 @@
 
 #import "Core.h"
 #import "HTTPClient.h"
+#import <AFImageDownloader.h>
 #import "ParserManager.h"
+
 
 @interface Core()
 @property (nonatomic, strong) HTTPClient *httpclient;
@@ -27,7 +29,6 @@
     });
     return instance;
 }
-
 
 - (instancetype)init
 {
@@ -53,6 +54,12 @@
             {
                 successBlock(objects);
             }
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+
+                [self.databaseManager removeOldEvents];
+            });
+            
         }];
         
     } failure:^(NSError *error) {
@@ -62,6 +69,22 @@
             successBlock(error);
         }
     }];
-    
+}
+
+- (void)downloadImage:(NSString *)stringURL success:(void (^)(id object))successBlock
+{
+    [self.httpclient downlodImage:stringURL success:^(id responseObject) {
+        
+        if (successBlock)
+        {
+            successBlock(responseObject);
+        }
+        
+    } failure:^(NSError *error) {
+        if (successBlock)
+        {
+            successBlock(nil);
+        }
+    }];
 }
 @end

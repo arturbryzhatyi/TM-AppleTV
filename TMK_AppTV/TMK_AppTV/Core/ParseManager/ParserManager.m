@@ -81,6 +81,28 @@
                         }
                     }
                     
+                    value = object[@"_embedded"][@"venues"];
+                    IfArrayValueNotNull(value)
+                    {
+                        NSDictionary *dict = [value firstObject];
+                        
+                        Venue *venue = [self getVenueWithID:dict[@"id"]];
+                        if (venue == nil)
+                        {
+                            venue = [Venue insertInManagedObjectContext:dataManager.managedObjectContext];
+                            venue.id = dict[@"id"];
+                            venue.name = dict[@"name"];
+                            venue.cityName = dict[@"city"][@"name"];
+                            venue.countryName = dict[@"country"][@"name"];
+                            venue.latitude = [NSNumber numberWithDouble:[dict[@"location"][@"latitude"] doubleValue]];
+                            venue.longitude = [NSNumber numberWithDouble:[dict[@"location"][@"longitude"] doubleValue]];
+                            venue.postalCode = dict[@"postalCode"];
+                            venue.stateName = dict[@"state"][@"name"];
+                        }
+                        
+                        nEvent.venue = venue;
+                    }
+                    
                     value = object[@"classifications"];
                     IfArrayValueNotNull(value)
                     {
@@ -140,6 +162,18 @@
     {
         success([NSArray arrayWithArray:mArr]);
     }
+}
+
+- (Venue *)getVenueWithID:(NSString *)objectID
+{
+    NSSet *set = [[[Core sharedInstance] databaseManager] fetchObjectsForEntityName:@"Venue" withPredicate:[NSPredicate predicateWithFormat:@"id == %@", objectID]];
+    
+    if ([set count] > 0)
+    {
+        return set.allObjects.firstObject;
+    }
+    
+    return nil;
 }
 
 - (Segment *)getSegmentWithID:(NSString *)objectID
