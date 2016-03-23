@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIStackView *buttonsView;
 @property (weak, nonatomic) IBOutlet UILabel *leftHeaderLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *qrCodeImageView;
 
 @end
 
@@ -59,21 +60,56 @@
     NSInteger count = arc4random() % 100000 + 23;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    [self.subTitleLabel setText:[NSString stringWithFormat:@"❤️%@  Category: %@  Genre: %@",
+    [self.subTitleLabel setText:[NSString stringWithFormat:@"❤️ %@  %@  %@  2h 30m",
                                  [formatter stringFromNumber:[NSNumber numberWithInteger:count]],
                                  event.segment.name,
                                  [event genre]]];
     
-    [self setEventLocation:event.venue];
+    [self setEventLocation:event.venue andDate:event.localDateTime];
+    [self loadQRWithURL:event.eventURL];
 }
 
-- (void)setEventLocation:(Venue *)loc
+- (void)setEventLocation:(Venue *)loc andDate:(NSDate *)date
 {
     NSParameterAssert(loc);
     
-    NSString *locationString = [NSString stringWithFormat:@"City: %@\n\nState: %@\n\nCountry: %@", loc.cityName, loc.stateName, loc.countryName];
+//    NSString *locationString = [NSString stringWithFormat:@"City:\n%@\nState:\n%@\nCountry:\n%@\nVenue name:\n%@", loc.cityName, loc.stateName, loc.countryName, loc.name];
     
-    [self.leftHeaderLabel setText:locationString];
+    NSMutableAttributedString *attString = [self.leftHeaderLabel.attributedText mutableCopy];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM dd, yyyy"];
+    
+    
+    [attString replaceCharactersInRange:NSMakeRange(24, 3) withString:[formatter stringFromDate:date]];
+    [attString replaceCharactersInRange:NSMakeRange(19, 3) withString:loc.name];
+    [attString replaceCharactersInRange:NSMakeRange(8, 3) withString:[NSString stringWithFormat:@"%@\n%@\n%@",
+                                                                      loc.cityName,
+                                                                      loc.stateName,
+                                                                      loc.countryName]];
+    
+    [self.leftHeaderLabel setAttributedText:attString];
+}
+
+- (void)loadQRWithURL:(NSString *)url
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSString *stringUrl = [url copy];
+        
+        stringUrl = [NSString stringWithFormat:@"https://api.qrserver.com/v1/create-qr-code/?data=%@&size=200x200", stringUrl];
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringUrl]];
+        
+        if (data)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                UIImage *img = [UIImage imageWithData:data];
+                [self.qrCodeImageView setImage:img];
+            });
+        }
+    });
 }
 
 - (void)awakeFromNib {

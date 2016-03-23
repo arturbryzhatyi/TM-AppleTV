@@ -7,11 +7,8 @@
 //
 
 #import "FlickerCell.h"
-#import "Core.h"
-#import "Event.h"
-#import "ContentViewCell.h"
 #import <FlickrKit.h>
-#import <UIImageView+AFNetworking.h>
+#import "Core.h"
 
 
 @interface TableViewCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -23,6 +20,19 @@
 @end
 
 @implementation FlickerCell
+
++ (CGFloat)defHeight
+{
+    return 300;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).minimumInteritemSpacing = 10000.0f;
+}
 
 - (void)setEventWithID:(NSString *)objectID;
 {
@@ -37,31 +47,43 @@
     NSParameterAssert(event);
     
     
-    NSString *tags = [event.name stringByReplacingOccurrencesOfString:@" " withString:@","];
-//    tags = [tags stringByAppendingFormat:@",%@", event.genres.allObjects.firstObject.name];
-    
-    NSString *unfilteredString = event.name;//@"!@#$%^&*()_+|abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
-    NSString *resultString = [[unfilteredString componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
-    NSLog (@"Result: %@", resultString);
+    NSString *tags = [NSString stringWithFormat:@"%@,%@,%@",event.segment.name, event.genre, event.name];
+    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
+    tags = [[tags componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@","];
+    tags = [tags stringByReplacingOccurrencesOfString:@",," withString:@""];
     
     FlickrKit *fk = [FlickrKit sharedFlickrKit];
     NSDictionary *args = @{@"api_key": fk.apiKey,
-                           @"text": event.name,
+//                           @"text": event.name,
                            @"tags": tags,
-                           @"tag_mode": @"AND"};
+                           @"tag_mode": @"AND",
+                           @"lat": @"34.061128",
+                           @"lon": @"-118.312686",
+//                           @"radius": @"32",
+                           @"safe_search": @"1"};
     
-    [fk call:@"flickr.photos.search" args:args completion:^(NSDictionary *response, NSError *error) {
+    [fk call:@"flickr.photos.search" args:args maxCacheAge:FKDUMaxAgeNeverCache completion:^(NSDictionary *response, NSError *error) {
         
         if (response)
         {
             NSMutableArray *photoURLs = [NSMutableArray array];
             
-            for (NSDictionary *photoData in [response valueForKeyPath:@"photos.photo"])
+            NSArray *photoResponce = [response valueForKeyPath:@"photos.photo"];
+            
+            if ([photoResponce count] == 0)
+                NSLog(@"Flickr: No result for = [%@]", tags);
+            
+            if ([photoResponce count] > 15)
+            {
+                photoResponce = [photoResponce subarrayWithRange:NSMakeRange(0, 15)];
+            }
+            
+            for (NSDictionary *photoData in photoResponce)
             {
                 NSURL *url = [fk photoURLForSize:FKPhotoSizeSmall320 fromPhotoDictionary:photoData];
                 [photoURLs addObject:url];
             }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Any GUI related operations here
                 
@@ -70,7 +92,7 @@
         }
         else if (error)
         {
-            NSLog(@"Flicker ERROR: %@", error.localizedDescription);
+            NSLog(@"Flicker ERROR: %@ [%@]", error.localizedDescription, tags);
         }
     }];
 }

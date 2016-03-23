@@ -10,6 +10,8 @@
 
 @interface FlickerCell : TableViewCell
 
++ (CGFloat)defHeight;
+
 - (void)setEventWithID:(NSString *)objectID;
 
 @end

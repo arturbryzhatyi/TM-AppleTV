@@ -7,10 +7,6 @@
 //
 
 #import "TableViewCell.h"
-#import "Segment.h"
-#import "Event.h"
-#import "ContentViewCell.h"
-#import <UIImageView+AFNetworking.h>
 
 @interface TableViewCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -36,6 +32,11 @@
 
 - (void)setObjects:(NSArray *)value
 {
+    if ([value count] > 30)
+    {
+        value = [value subarrayWithRange:NSMakeRange(0, 30)];
+    }
+    
     _objects = value;
     [self.collectionView reloadData];
 }
@@ -81,6 +82,7 @@
 }
 
 #pragma mark - Layout
+
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    CGFloat width = [UIScreen mainScreen].bounds.size.width / 5;

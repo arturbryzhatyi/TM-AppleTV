@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7BC13840EC30D5F640FD8528 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3376DDED2159C16291D2C62 /* libPods.a */; };
 		901614611C96C16500B0870D /* CarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 901614601C96C16500B0870D /* CarouselView.m */; };
+		9026B3A61CA162E300A43815 /* YoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9026B3A51CA162E300A43815 /* YoutubeCell.m */; };
+		9026B3A91CA18B4700A43815 /* ITunesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9026B3A81CA18B4700A43815 /* ITunesCell.m */; };
 		903390F21C98513000B3F729 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 903390F11C98513000B3F729 /* TableViewCell.m */; };
 		904822E41C9FFD79009EE7C6 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 904822E31C9FFD79009EE7C6 /* HeaderCell.m */; };
 		904822E71CA00023009EE7C6 /* FlickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 904822E61CA00023009EE7C6 /* FlickerCell.m */; };
@@ -41,6 +43,10 @@
 		808FE9801D8A83548E83BCDD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9016145F1C96C16500B0870D /* CarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarouselView.h; sourceTree = "<group>"; };
 		901614601C96C16500B0870D /* CarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselView.m; sourceTree = "<group>"; };
+		9026B3A41CA162E300A43815 /* YoutubeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YoutubeCell.h; sourceTree = "<group>"; };
+		9026B3A51CA162E300A43815 /* YoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YoutubeCell.m; sourceTree = "<group>"; };
+		9026B3A71CA18B4700A43815 /* ITunesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesCell.h; sourceTree = "<group>"; };
+		9026B3A81CA18B4700A43815 /* ITunesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITunesCell.m; sourceTree = "<group>"; };
 		903390F01C98513000B3F729 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		903390F11C98513000B3F729 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		904822E21C9FFD79009EE7C6 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
@@ -143,6 +149,10 @@
 				904822E61CA00023009EE7C6 /* FlickerCell.m */,
 				904822EE1CA02A70009EE7C6 /* DescriptionCell.h */,
 				904822EF1CA02A70009EE7C6 /* DescriptionCell.m */,
+				9026B3A41CA162E300A43815 /* YoutubeCell.h */,
+				9026B3A51CA162E300A43815 /* YoutubeCell.m */,
+				9026B3A71CA18B4700A43815 /* ITunesCell.h */,
+				9026B3A81CA18B4700A43815 /* ITunesCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -410,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E0E9DE1C96CC3600C6D4AC /* Segment+CoreDataProperties.m in Sources */,
+				9026B3A61CA162E300A43815 /* YoutubeCell.m in Sources */,
 				9054FF8F1C85A285003449B7 /* ViewController.m in Sources */,
 				909926311C96E74E006A7741 /* ContentViewCell.m in Sources */,
 				90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */,
@@ -424,6 +435,7 @@
 				90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */,
 				90D913781C870AF0005E5972 /* Core.m in Sources */,
 				901614611C96C16500B0870D /* CarouselView.m in Sources */,
+				9026B3A91CA18B4700A43815 /* ITunesCell.m in Sources */,
 				90D9137E1C870CC4005E5972 /* HTTPClient.m in Sources */,
 				90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */,
 				90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */,

@@ -17,7 +17,7 @@ NSString * const baseURL = @"https://app.ticketmaster.com/discovery/v2";
 NSString * const postalCode = @"90069";
 
 NSString * const latlong = @"34.061128,-118.312686";
-NSString * const radius = @"99";
+NSString * const radius = @"10000";
 
 @implementation HTTPClient
 

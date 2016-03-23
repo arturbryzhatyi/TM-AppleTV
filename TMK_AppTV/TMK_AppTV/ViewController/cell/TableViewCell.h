@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Segment.h"
+#import "Event.h"
+#import "ContentViewCell.h"
+#import <UIImageView+AFNetworking.h>
+
 
 @interface TableViewCell : UITableViewCell
 

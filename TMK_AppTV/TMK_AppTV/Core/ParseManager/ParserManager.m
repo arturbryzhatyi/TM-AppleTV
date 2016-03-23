@@ -63,6 +63,12 @@
                         nEvent.localDateTime = date;
                     }
                     
+                    value = object[@"url"];
+                    IfStringValueNotNull(value)
+                    {
+                        nEvent.eventURL = value;
+                    }
+                    
                     value = object[@"images"];
                     IfArrayValueNotNull(value)
                     {

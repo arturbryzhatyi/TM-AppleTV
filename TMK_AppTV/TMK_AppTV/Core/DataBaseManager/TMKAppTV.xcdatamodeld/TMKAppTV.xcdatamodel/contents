@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="eventURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="images" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="localDateTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -31,7 +32,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="venue" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-119" positionY="1586" width="128" height="150"/>
+        <element name="Event" positionX="-119" positionY="1586" width="128" height="163"/>
         <element name="Genre" positionX="259" positionY="1368" width="128" height="88"/>
         <element name="Segment" positionX="223" positionY="1692" width="128" height="88"/>
         <element name="Venue" positionX="-362" positionY="1575" width="128" height="180"/>

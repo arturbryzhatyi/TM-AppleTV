@@ -10,15 +10,17 @@
 #import "Core.h"
 #import "HeaderCell.h"
 #import "FlickerCell.h"
+#import "YoutubeCell.h"
+#import "ITunesCell.h"
 #import "DescriptionCell.h"
 #import <UIImageView+AFNetworking.h>
 
 typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     
     DetailHeaderCell,
-//    DetailDescriprionCell,
+    DetailITunesCell,
     DetailFlickerCell,
-//    DateilYoutubeCell,
+    DateilYoutubeCell,
     Detail_COUNT
 };
 
@@ -26,6 +28,9 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
 @interface DetailViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UIImageView *backgrounImageView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) Event *currentEvent;
+
 @end
 
 @implementation DetailViewController
@@ -41,6 +46,8 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     if ([fetchObject count] == 1)
     {
         event = (Event *)[fetchObject anyObject];
+        
+        self.currentEvent = event;
         
         [self.backgrounImageView setImageWithURL:[event imageURL]];
     }
@@ -67,11 +74,27 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     return 20;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
+    if (indexPath.row == DetailHeaderCell)
     {
-        return [HeaderCell defHeight];
+        return [UIScreen mainScreen].bounds.size.height - [FlickerCell defHeight] - 110;
+    }
+    else if (indexPath.row == DetailITunesCell)
+    {
+        if ([[self.currentEvent.segment.name lowercaseString] isEqualToString:@"music"])
+        {
+            return [ITunesCell defHeight];
+        }
+        return 0;
+    }
+    else if (indexPath.row == DetailFlickerCell)
+    {
+        return [FlickerCell defHeight];
+    }
+    else if (indexPath.row == DateilYoutubeCell)
+    {
+        return [YoutubeCell defHeight];
     }
     
     return 0;
@@ -91,20 +114,23 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
             [(HeaderCell *)cell setEventWithID:self.eventID];
         }
             break;
-/*        
-        case DetailDescriprionCell:
-        {
-            identifier = @"descriptionCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell.backgroundColor = [UIColor lightGrayColor];
-        }
-            break;
-*/
         case DetailFlickerCell:
         {
             identifier = @"flickerCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             [(FlickerCell *)cell setEventWithID:self.eventID];
+        }
+            break;
+        case DetailITunesCell:
+        {
+            identifier = @"itunesCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        }
+            break;
+        case DateilYoutubeCell:
+        {
+            identifier = @"youtubeCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         }
             break;
         default:

@@ -22,7 +22,12 @@
 {
     NSArray *a = [[self genres] allObjects];
     
-    return [(Genre *)a.firstObject name];
+    NSString *result = [(Genre *)a.firstObject name];
+    
+    if ([[result lowercaseString] isEqualToString:@"undefined"])
+        result = @"";
+    
+    return result;
 }
 
 - (NSURL *)imageURL

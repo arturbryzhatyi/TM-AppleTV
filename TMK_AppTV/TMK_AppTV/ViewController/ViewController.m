@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 
-    [[Core sharedInstance] searchKey:@"music" success:^(id object) {
+    [[Core sharedInstance] searchKey:@"family" success:^(id object) {
         
         NSLog(@">>> %@", object);
         
