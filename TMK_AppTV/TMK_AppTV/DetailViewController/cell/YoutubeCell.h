@@ -12,4 +12,6 @@
 
 + (CGFloat)defHeight;
 
+- (void)setKeyword:(NSString *)value;
+
 @end

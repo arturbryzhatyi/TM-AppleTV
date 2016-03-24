@@ -10,7 +10,7 @@
         <!--Search-->
         <scene sceneID="vlM-04-7rV">
             <objects>
-                <viewController id="k9p-xk-Ox6" sceneMemberID="viewController">
+                <viewController id="k9p-xk-Ox6" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SmL-jZ-42I"/>
                         <viewControllerLayoutGuide type="bottom" id="Kph-o3-VW8"/>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wuF-az-46Q">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search event" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wuF-az-46Q">
                                 <rect key="frame" x="100" y="200" width="1720" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="wdq-qo-xfD"/>
@@ -35,6 +35,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" id="Sss-bq-Ok2"/>
+                    <connections>
+                        <outlet property="textField" destination="wuF-az-46Q" id="U5k-Gu-J7c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEZ-yv-gQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -518,10 +521,10 @@ Cg
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
                                                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="Oed-vA-3XJ" customClass="ContentViewCell">
-                                                                        <rect key="frame" x="50" y="13" width="250" height="235"/>
+                                                                        <rect key="frame" x="50" y="13" width="250" height="234.5"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="235"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="234.5"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vTc-Ca-PAt">

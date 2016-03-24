@@ -27,6 +27,8 @@
 		90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */; };
 		90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC61C89C0A4004F8C52 /* DetailViewController.m */; };
 		908993111C888B0A005ABDA3 /* ParserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 908993101C888B0A005ABDA3 /* ParserManager.m */; };
+		909442FF1CA2D7CD00FFF552 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 909442FE1CA2D7CD00FFF552 /* SearchViewController.m */; };
+		909443031CA3E76400FFF552 /* ItemYoutube.m in Sources */ = {isa = PBXBuildFile; fileRef = 909443021CA3E76400FFF552 /* ItemYoutube.m */; };
 		909926311C96E74E006A7741 /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099262F1C96E74E006A7741 /* ContentViewCell.m */; };
 		909926371C97094D006A7741 /* UIView+Constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 909926361C97094D006A7741 /* UIView+Constraint.m */; };
 		90D913781C870AF0005E5972 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913771C870AF0005E5972 /* Core.m */; };
@@ -77,6 +79,10 @@
 		90877EC61C89C0A4004F8C52 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		9089930F1C888B0A005ABDA3 /* ParserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserManager.h; sourceTree = "<group>"; };
 		908993101C888B0A005ABDA3 /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserManager.m; sourceTree = "<group>"; };
+		909442FD1CA2D7CD00FFF552 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		909442FE1CA2D7CD00FFF552 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		909443011CA3E76400FFF552 /* ItemYoutube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemYoutube.h; sourceTree = "<group>"; };
+		909443021CA3E76400FFF552 /* ItemYoutube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemYoutube.m; sourceTree = "<group>"; };
 		9099262F1C96E74E006A7741 /* ContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewCell.m; sourceTree = "<group>"; };
 		909926301C96E74E006A7741 /* ContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewCell.h; sourceTree = "<group>"; };
 		909926351C97094D006A7741 /* UIView+Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraint.h"; sourceTree = "<group>"; };
@@ -182,11 +188,12 @@
 				9054FF8B1C85A285003449B7 /* AppDelegate.m */,
 				9054FF931C85A285003449B7 /* Assets.xcassets */,
 				90D913741C870AB1005E5972 /* Core */,
-				90D913751C870ABE005E5972 /* ViewController */,
 				90877EC41C89C081004F8C52 /* DetailViewController */,
-				9054FF901C85A285003449B7 /* Main.storyboard */,
 				9054FF951C85A285003449B7 /* Info.plist */,
+				9054FF901C85A285003449B7 /* Main.storyboard */,
+				909442FC1CA2D7AA00FFF552 /* SearchViewController */,
 				9054FF871C85A285003449B7 /* Supporting Files */,
+				90D913751C870ABE005E5972 /* ViewController */,
 			);
 			path = TMK_AppTV;
 			sourceTree = "<group>";
@@ -227,11 +234,30 @@
 		90877EC41C89C081004F8C52 /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				909443001CA3E74200FFF552 /* youtube */,
 				904822E11C9FFD5F009EE7C6 /* cell */,
 				90877EC51C89C0A4004F8C52 /* DetailViewController.h */,
 				90877EC61C89C0A4004F8C52 /* DetailViewController.m */,
 			);
 			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		909442FC1CA2D7AA00FFF552 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				909442FD1CA2D7CD00FFF552 /* SearchViewController.h */,
+				909442FE1CA2D7CD00FFF552 /* SearchViewController.m */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		909443001CA3E74200FFF552 /* youtube */ = {
+			isa = PBXGroup;
+			children = (
+				909443011CA3E76400FFF552 /* ItemYoutube.h */,
+				909443021CA3E76400FFF552 /* ItemYoutube.m */,
+			);
+			path = youtube;
 			sourceTree = "<group>";
 		};
 		9099262B1C96E456006A7741 /* cell */ = {
@@ -425,6 +451,7 @@
 				909926311C96E74E006A7741 /* ContentViewCell.m in Sources */,
 				90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */,
 				90E0E9DD1C96CC3600C6D4AC /* Event.m in Sources */,
+				909442FF1CA2D7CD00FFF552 /* SearchViewController.m in Sources */,
 				908993111C888B0A005ABDA3 /* ParserManager.m in Sources */,
 				904822E71CA00023009EE7C6 /* FlickerCell.m in Sources */,
 				90E0E9E11C96CC3600C6D4AC /* Genre.m in Sources */,
@@ -439,6 +466,7 @@
 				90D9137E1C870CC4005E5972 /* HTTPClient.m in Sources */,
 				90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */,
 				90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */,
+				909443031CA3E76400FFF552 /* ItemYoutube.m in Sources */,
 				904822EC1CA00AF9009EE7C6 /* Venue+CoreDataProperties.m in Sources */,
 				909926371C97094D006A7741 /* UIView+Constraint.m in Sources */,
 				904822F01CA02A70009EE7C6 /* DescriptionCell.m in Sources */,

@@ -131,6 +131,7 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
         {
             identifier = @"youtubeCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            [(YoutubeCell *)cell setKeyword:self.currentEvent.name];
         }
             break;
         default:
