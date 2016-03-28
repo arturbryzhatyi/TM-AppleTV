@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <FlickrKit.h>
-
+#import "Core.h"
 
 #define kFlickerApiKey @"a2e3789039074383ccca61edbc86313f"
 #define kFlickerSecret @"75c0ae39b1aad727"
@@ -34,6 +34,21 @@
     sleep(1);
     
     [[FlickrKit sharedFlickrKit] initializeWithAPIKey:kFlickerApiKey sharedSecret:kFlickerSecret];
+    
+    
+    // load data
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       
+        NSArray *artist = @[@"kids", @"family", @"adele", @"Red+Hot+Chili+Peppers", @"zz", @"Beyonce", @"Billy+Joe", @"Chris+Brown", @"Coldplay", @"Justin+Bieber", @"Maroon5", @"Rihanna"];
+        
+        for (NSString *term in artist)
+        {
+            [[Core sharedInstance] searchKey:term success:^(id object) {
+
+                NSLog(@"Search: %@ : count=%lu", term, (unsigned long)[(NSArray *)object count]);
+            }];
+        }
+    });
     
     return YES;
 }

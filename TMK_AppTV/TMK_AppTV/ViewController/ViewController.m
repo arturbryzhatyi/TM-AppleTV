@@ -27,13 +27,10 @@
 {
     [super viewDidLoad];
 
-    [[Core sharedInstance] searchKey:@"chili" success:^(id object) {
-        
-        NSLog(@">>> %@", object);
-        
-        NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
-        [self.carouselView setObjects:set.allObjects];
-    }];
+//    [[Core sharedInstance] searchKey:@"chili" success:^(id object) {
+//        
+//        NSLog(@">>> %@", object);
+//    }];
     
     NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
     [self.carouselView setObjects:set.allObjects];
@@ -228,6 +225,9 @@
 {
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
+    
+    NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
+    [self.carouselView setObjects:set.allObjects];
 }
 @end
 

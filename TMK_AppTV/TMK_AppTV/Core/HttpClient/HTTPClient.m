@@ -41,7 +41,7 @@ NSString * const radius = @"10000";
     
     [self GET:@"events.json" parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"URL: %@", task.response.URL);
+//        NSLog(@"URL: %@", task.response.URL);
 //        NSLog(@"Success: %@", responseObject);
         if (success)
         {
