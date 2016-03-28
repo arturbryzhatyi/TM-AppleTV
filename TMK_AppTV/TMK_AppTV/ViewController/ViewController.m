@@ -27,12 +27,12 @@
 {
     [super viewDidLoad];
 
-    [[Core sharedInstance] searchKey:@"family" success:^(id object) {
+    [[Core sharedInstance] searchKey:@"chili" success:^(id object) {
         
         NSLog(@">>> %@", object);
         
-//        NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
-//        [self.carouselView setObjects:set.allObjects];
+        NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];
+        [self.carouselView setObjects:set.allObjects];
     }];
     
     NSSet *set = [[Core sharedInstance].databaseManager fetchUniqueObjectsForEntityName:@"Event"];

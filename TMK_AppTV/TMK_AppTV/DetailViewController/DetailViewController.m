@@ -12,15 +12,16 @@
 #import "FlickerCell.h"
 #import "YoutubeCell.h"
 #import "ITunesCell.h"
-#import "DescriptionCell.h"
+//#import "DescriptionCell.h"
+#import "QRViewController.h"
 #import <UIImageView+AFNetworking.h>
 
 typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     
     DetailHeaderCell,
     DetailITunesCell,
-    DetailFlickerCell,
     DateilYoutubeCell,
+    DetailFlickerCell,
     Detail_COUNT
 };
 
@@ -125,12 +126,14 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
         {
             identifier = @"itunesCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            [(ITunesCell *)cell setITunesTerm:self.currentEvent.name];
         }
             break;
         case DateilYoutubeCell:
         {
             identifier = @"youtubeCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            [(YoutubeCell *)cell setParentViewController:self];
             [(YoutubeCell *)cell setKeyword:self.currentEvent.name];
         }
             break;
@@ -142,14 +145,20 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     return cell;
 }
 
-/*
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showQR"])
+    {
+        QRViewController *controlelr = [segue destinationViewController];
+        [controlelr setTitle:self.currentEvent.name];
+        [controlelr setEventURL:[self.currentEvent.eventURL copy]];
+    }
 }
-*/
+
 
 @end

@@ -66,7 +66,7 @@
                                  [event genre]]];
     
     [self setEventLocation:event.venue andDate:event.localDateTime];
-    [self loadQRWithURL:event.eventURL];
+//    [self loadQRWithURL:event.eventURL];
 }
 
 - (void)setEventLocation:(Venue *)loc andDate:(NSDate *)date

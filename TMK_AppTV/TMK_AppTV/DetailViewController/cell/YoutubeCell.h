@@ -9,6 +9,8 @@
 #import "TableViewCell.h"
 
 @interface YoutubeCell : TableViewCell
+@property (assign) id parentViewController;
+
 
 + (CGFloat)defHeight;
 

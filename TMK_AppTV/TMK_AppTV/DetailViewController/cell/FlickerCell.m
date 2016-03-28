@@ -47,7 +47,7 @@
     NSParameterAssert(event);
     
     
-    NSString *tags = [NSString stringWithFormat:@"%@,%@,%@",event.segment.name, event.genre, event.name];
+    NSString *tags = [NSString stringWithFormat:@"%@,%@", event.genre, event.name];
     NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
     tags = [[tags componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@","];
     tags = [tags stringByReplacingOccurrencesOfString:@",," withString:@""];
@@ -56,7 +56,7 @@
     NSDictionary *args = @{@"api_key": fk.apiKey,
 //                           @"text": event.name,
                            @"tags": tags,
-                           @"tag_mode": @"AND",
+                           @"tag_mode": @"OR",
                            @"lat": @"34.061128",
                            @"lon": @"-118.312686",
 //                           @"radius": @"32",
@@ -69,6 +69,7 @@
             NSMutableArray *photoURLs = [NSMutableArray array];
             
             NSArray *photoResponce = [response valueForKeyPath:@"photos.photo"];
+        
             
             if ([photoResponce count] == 0)
                 NSLog(@"Flickr: No result for = [%@]", tags);

@@ -12,4 +12,15 @@
 
 + (CGFloat)defHeight;
 
+- (void)setITunesTerm:(NSString *)value;
+
+@end
+
+
+@interface ItemITunes : NSObject
+@property (nonatomic, strong, readonly) NSString *title;
+@property (nonatomic, strong, readonly) NSString *thumbURL;
+@property (nonatomic, strong, readonly) NSString *previewAudioURL;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
 @end

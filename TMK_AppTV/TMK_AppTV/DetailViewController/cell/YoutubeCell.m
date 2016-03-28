@@ -8,7 +8,10 @@
 
 #import "YoutubeCell.h"
 #import "UIView+Constraint.h"
-#import "ItemYoutube.h"
+#import <AVKit/AVKit.h>
+#import <XCDYouTubeKit.h>
+#import "ParserManager.h"
+
 
 #define kYoutubeAliKey @"AIzaSyA8Ar4X7hboaIxuOhzYeoygLp8DLeTw9iI"
 
@@ -19,7 +22,7 @@
 
 @interface YoutubeCell ()
 @property (nonatomic, strong) UIImageView *playImageView;
-@property (nonnull, strong) NSString *keyword;
+@property (nonnull, strong) NSString *keyWord;
 @end
 
 @implementation YoutubeCell
@@ -29,24 +32,16 @@
     return 300;
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-//    self.objects = @[@"youtubeCell", @"youtubeCell1", @"youtubeCell2", @"youtubeCell3"];
-}
-
 - (void)setKeyword:(NSString *)value
 {
     NSParameterAssert(value);
     
-    _keyword = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    _keyWord = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         NSString *stringURL = @"https://www.googleapis.com/youtube/v3/search?part=snippet&q=%@&key=%@";
-        stringURL = [NSString stringWithFormat:stringURL, _keyword, kYoutubeAliKey];
-        
-        
+        stringURL = [NSString stringWithFormat:stringURL, _keyWord, kYoutubeAliKey];
         NSURL *url = [NSURL URLWithString:stringURL];
         
         NSError *err = nil;
@@ -55,44 +50,115 @@
         
         if (dict)
         {
-//            NSLog(@"URL: %@\nResponse: %@", url, dict);
-            
             NSArray *a = [dict valueForKey:@"items"];
-            
-            NSMutableArray *mArray = [NSMutableArray new];
             for (NSDictionary *d in a)
             {
-                ItemYoutube *item = [[ItemYoutube alloc] initWithDictionary:d];
-                if (item)
-                {
-                    [mArray addObject:item];
-                }
-            }
+                id value = [d valueForKeyPath:@"id.videoId"];
             
-            self.objects = [NSArray arrayWithArray:mArray];
+                [[XCDYouTubeClient defaultClient] getVideoWithIdentifier:value completionHandler:^(XCDYouTubeVideo *video, NSError *error) {
+                    
+                    if (video)
+                    {
+                        [self addNewVideo:video];
+                    }
+                }];
+            }
         }
         else
         {
             NSLog(@"No data from Youtube");
-            self.objects = @[@"youtubeCell", @"youtubeCell1", @"youtubeCell2", @"youtubeCell3", @"youtubeCell4", @"youtubeCell5", @"youtubeCell6", @"youtubeCell7"];
         }
     });
 }
 
+- (void)addNewVideo:(XCDYouTubeVideo *)video
+{
+    NSParameterAssert(video);
+    
+    @synchronized (self.objects)
+    {
+        NSMutableArray *mArray = [self.objects mutableCopy];
+        [mArray addObject:video];
+        self.objects = [NSArray arrayWithArray:mArray];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.collectionView reloadData];
+        });
+    }
+}
+
 - (void)configureCell:(ContentViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-    ItemYoutube *item = self.objects[indexPath.row];
-    NSURL *url = [NSURL URLWithString:item.videoThumbURL];
+    XCDYouTubeVideo *item = self.objects[indexPath.row];
     
-    if (url)
-        [cell.imageView setImageWithURL:url];
+    NSURL *thumbURL = item.largeThumbnailURL;
+    
+    if (thumbURL.absoluteString.length == 0)
+        thumbURL = item.mediumThumbnailURL;
+    
+    if (thumbURL.absoluteString.length == 0)
+        thumbURL = item.smallThumbnailURL;
+    
+    
+    if (thumbURL)
+        [cell.imageView setImageWithURL:thumbURL];
     else
         NSLog(@"No thumb URL");
 
+    [cell.textLabel setText:item.title];
+    
     self.playImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play-video"]];
     [cell.contentView addSubview:self.playImageView];
     [self.playImageView addConstraintWidth:70 height:70];
     [self.playImageView addConstraintCenteringXY];
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.parentViewController isKindOfClass:[UIViewController class]])
+    {
+        XCDYouTubeVideo *video = self.objects[indexPath.row];
+        AVPlayerViewController *playerViewController = [AVPlayerViewController new];
+        [self.parentViewController presentViewController:playerViewController animated:YES completion:nil];
+
+        NSDictionary *streamURLs = video.streamURLs;
+        NSURL *streamURL = streamURLs[XCDYouTubeVideoQualityHTTPLiveStreaming] ?:
+                            streamURLs[@(XCDYouTubeVideoQualityHD720)] ?:
+                            streamURLs[@(XCDYouTubeVideoQualityMedium360)] ?:
+                            streamURLs[@(XCDYouTubeVideoQualitySmall240)];
+        
+        playerViewController.player = [AVPlayer playerWithURL:streamURL];
+        [playerViewController.player play];
+    }
+}
+
+- (void)playVideoWithID:(NSString *)videoID
+{
+    NSParameterAssert(videoID);
+    
+    
+    
+//    XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:videoID];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(moviePlayerPlaybackDidFinish:)
+//                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+//                                               object:videoPlayerViewController.moviePlayer];
+//    [self presentMoviePlayerViewControllerAnimated:videoPlayerViewController];
+}
+
+- (void)moviePlayerPlaybackDidFinish:(NSNotification *)notification
+{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:notification.object];
+//    MPMovieFinishReason finishReason = [notification.userInfo[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] integerValue];
+//    if (finishReason == MPMovieFinishReasonPlaybackError)
+//    {
+//        NSError *error = notification.userInfo[XCDMoviePlayerPlaybackDidFinishErrorUserInfoKey];
+//        // Handle error
+//    }
+}
+
 @end
+
+
+
