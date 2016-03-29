@@ -11,6 +11,7 @@
 #import <AFImageDownloader.h>
 #import "ParserManager.h"
 
+#import "XMLDictionary.h"
 
 @interface Core()
 @property (nonatomic, strong) HTTPClient *httpclient;
@@ -26,6 +27,7 @@
     dispatch_once(&onceToken, ^{
         
         instance = [[Core alloc] init];
+        [instance rssAtom];
     });
     return instance;
 }
@@ -86,5 +88,20 @@
             successBlock(nil);
         }
     }];
+}
+
+#pragma mark - RSS
+- (void)rssAtom
+{
+    NSURL *url = [NSURL URLWithString:@"http://rss.infongen.com/searches/41ccec69-7827-40d5-a5b3-8e0b60419a8e?format=Rss20&allowExtensions=False&token=ACCTID%3D54784435%26CLID%3D83%26REF%3DDP%26UID%3Devgeny_semenov1%2540epam.com%26ExpiresOn%3D253402300799%26HMACSHA256%3DZdkjdwoyfyTs%252fBCp1ig976a4x5wOnvLk5i6a8lYthTQ%253d"];
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+    
+    d = d[@"channel"][@"item"];
+    
+    NSLog(@"");
+
 }
 @end

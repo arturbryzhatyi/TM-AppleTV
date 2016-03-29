@@ -24,6 +24,8 @@
 		9054FF8F1C85A285003449B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9054FF8E1C85A285003449B7 /* ViewController.m */; };
 		9054FF921C85A285003449B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF901C85A285003449B7 /* Main.storyboard */; };
 		9054FF941C85A285003449B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF931C85A285003449B7 /* Assets.xcassets */; };
+		905B76B11CA9BBF50046B67B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76B01CA9BBF50046B67B /* XMLDictionary.m */; };
+		905B76B61CAA7ABE0046B67B /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76B51CAA7ABE0046B67B /* SearchCell.m */; };
 		90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90877E9C1C898625004F8C52 /* TMKAppTV.xcdatamodeld */; };
 		90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EAD1C89888B004F8C52 /* DatabaseManager.m */; };
 		90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */; };
@@ -75,6 +77,10 @@
 		9054FF911C85A285003449B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9054FF931C85A285003449B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9054FF951C85A285003449B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		905B76AF1CA9BBF50046B67B /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		905B76B01CA9BBF50046B67B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		905B76B41CAA7ABE0046B67B /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
+		905B76B51CAA7ABE0046B67B /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		90877E9D1C898625004F8C52 /* TMKAppTV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TMKAppTV.xcdatamodel; sourceTree = "<group>"; };
 		90877EAC1C89888B004F8C52 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		90877EAD1C89888B004F8C52 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
@@ -204,11 +210,30 @@
 		9054FF871C85A285003449B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				905B76AE1CA9BBF50046B67B /* XMLDictionary */,
 				909926351C97094D006A7741 /* UIView+Constraint.h */,
 				909926361C97094D006A7741 /* UIView+Constraint.m */,
 				9054FF881C85A285003449B7 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		905B76AE1CA9BBF50046B67B /* XMLDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				905B76AF1CA9BBF50046B67B /* XMLDictionary.h */,
+				905B76B01CA9BBF50046B67B /* XMLDictionary.m */,
+			);
+			path = XMLDictionary;
+			sourceTree = "<group>";
+		};
+		905B76B31CAA7A9F0046B67B /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				905B76B41CAA7ABE0046B67B /* SearchCell.h */,
+				905B76B51CAA7ABE0046B67B /* SearchCell.m */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		90877E9F1C89882D004F8C52 /* Entity */ = {
@@ -249,6 +274,7 @@
 		909442FC1CA2D7AA00FFF552 /* SearchViewController */ = {
 			isa = PBXGroup;
 			children = (
+				905B76B31CAA7A9F0046B67B /* cell */,
 				909442FD1CA2D7CD00FFF552 /* SearchViewController.h */,
 				909442FE1CA2D7CD00FFF552 /* SearchViewController.m */,
 			);
@@ -448,6 +474,7 @@
 				9054FF8F1C85A285003449B7 /* ViewController.m in Sources */,
 				909926311C96E74E006A7741 /* ContentViewCell.m in Sources */,
 				90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */,
+				905B76B11CA9BBF50046B67B /* XMLDictionary.m in Sources */,
 				90E0E9DD1C96CC3600C6D4AC /* Event.m in Sources */,
 				909442FF1CA2D7CD00FFF552 /* SearchViewController.m in Sources */,
 				908993111C888B0A005ABDA3 /* ParserManager.m in Sources */,
@@ -471,6 +498,7 @@
 				904822ED1CA00AF9009EE7C6 /* Venue.m in Sources */,
 				90113CF81CA43BDE00CD26EF /* TextAnalyzer.m in Sources */,
 				90113D1E1CA53F2D00CD26EF /* QRViewController.m in Sources */,
+				905B76B61CAA7ABE0046B67B /* SearchCell.m in Sources */,
 				90E0E9DC1C96CC3600C6D4AC /* Event+CoreDataProperties.m in Sources */,
 				90E0E9DF1C96CC3600C6D4AC /* Segment.m in Sources */,
 			);

@@ -28,15 +28,14 @@
                 id value = object[@"id"];
                 IfStringValueNotNull(value)
                 {
-                    
-                    NSSet *searchResult = [dataManager fetchObjectsForEntityName:@"Event"
-                                                                                    withPredicate:[NSPredicate predicateWithFormat:@"id == %@", value]];
+                    NSSet *searchResult = [dataManager fetchObjectsForEntityName:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"id == %@", value]];
                     
                     Event *nEvent = nil;
                     
                     if ([searchResult.allObjects count] > 0) {
                         
-                        continue;
+//                        continue;
+                        nEvent = [searchResult.allObjects firstObject];
                     } else {
                         
                         nEvent = [Event insertInManagedObjectContext:dataManager.managedObjectContext];
