@@ -13,4 +13,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
+- (void)setTitleText:(NSString *)value;
+
+- (void)setImage:(UIImage *)image;
+
 @end

@@ -31,6 +31,7 @@
 		905B76C21CAA87390046B67B /* NewsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76C11CAA87390046B67B /* NewsViewCell.m */; };
 		905B76C51CAA9B6A0046B67B /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76C41CAA9B6A0046B67B /* PhotoViewController.m */; };
 		905B76C81CAA9E620046B67B /* ITunesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76C71CAA9E620046B67B /* ITunesViewController.m */; };
+		905B76CB1CAAB5BC0046B67B /* DetailNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76CA1CAAB5BC0046B67B /* DetailNewsViewController.m */; };
 		90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90877E9C1C898625004F8C52 /* TMKAppTV.xcdatamodeld */; };
 		90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EAD1C89888B004F8C52 /* DatabaseManager.m */; };
 		90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */; };
@@ -96,6 +97,8 @@
 		905B76C41CAA9B6A0046B67B /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		905B76C61CAA9E620046B67B /* ITunesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesViewController.h; sourceTree = "<group>"; };
 		905B76C71CAA9E620046B67B /* ITunesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITunesViewController.m; sourceTree = "<group>"; };
+		905B76C91CAAB5BC0046B67B /* DetailNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNewsViewController.h; sourceTree = "<group>"; };
+		905B76CA1CAAB5BC0046B67B /* DetailNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNewsViewController.m; sourceTree = "<group>"; };
 		90877E9D1C898625004F8C52 /* TMKAppTV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TMKAppTV.xcdatamodel; sourceTree = "<group>"; };
 		90877EAC1C89888B004F8C52 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		90877EAD1C89888B004F8C52 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 				905B76BB1CAA83860046B67B /* newsItem */,
 				905B76B81CAA7FD70046B67B /* NewsViewController.h */,
 				905B76B91CAA7FD70046B67B /* NewsViewController.m */,
+				905B76C91CAAB5BC0046B67B /* DetailNewsViewController.h */,
+				905B76CA1CAAB5BC0046B67B /* DetailNewsViewController.m */,
 			);
 			path = NewsViewController;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905B76CB1CAAB5BC0046B67B /* DetailNewsViewController.m in Sources */,
 				90E0E9DE1C96CC3600C6D4AC /* Segment+CoreDataProperties.m in Sources */,
 				905B76BE1CAA83A00046B67B /* NewsItem.m in Sources */,
 				9026B3A61CA162E300A43815 /* YoutubeCell.m in Sources */,
