@@ -7,3 +7,4 @@ pod 'FlickrKit'
 pod 'XCDYouTubeKit', '~> 2.5'
 
 #pod 'BlockRSSParser', '~> 2.1'
+#pod 'AFSoundManager', '~> 2.1'

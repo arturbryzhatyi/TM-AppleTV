@@ -26,6 +26,11 @@
 		9054FF941C85A285003449B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9054FF931C85A285003449B7 /* Assets.xcassets */; };
 		905B76B11CA9BBF50046B67B /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76B01CA9BBF50046B67B /* XMLDictionary.m */; };
 		905B76B61CAA7ABE0046B67B /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76B51CAA7ABE0046B67B /* SearchCell.m */; };
+		905B76BA1CAA7FD70046B67B /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76B91CAA7FD70046B67B /* NewsViewController.m */; };
+		905B76BE1CAA83A00046B67B /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76BD1CAA83A00046B67B /* NewsItem.m */; };
+		905B76C21CAA87390046B67B /* NewsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76C11CAA87390046B67B /* NewsViewCell.m */; };
+		905B76C51CAA9B6A0046B67B /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76C41CAA9B6A0046B67B /* PhotoViewController.m */; };
+		905B76C81CAA9E620046B67B /* ITunesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905B76C71CAA9E620046B67B /* ITunesViewController.m */; };
 		90877E9E1C898625004F8C52 /* TMKAppTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90877E9C1C898625004F8C52 /* TMKAppTV.xcdatamodeld */; };
 		90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EAD1C89888B004F8C52 /* DatabaseManager.m */; };
 		90877EC31C898D49004F8C52 /* NSManagedObject+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC21C898D49004F8C52 /* NSManagedObject+extension.m */; };
@@ -81,6 +86,16 @@
 		905B76B01CA9BBF50046B67B /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		905B76B41CAA7ABE0046B67B /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
 		905B76B51CAA7ABE0046B67B /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
+		905B76B81CAA7FD70046B67B /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		905B76B91CAA7FD70046B67B /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		905B76BC1CAA83A00046B67B /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
+		905B76BD1CAA83A00046B67B /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
+		905B76C01CAA87390046B67B /* NewsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewCell.h; sourceTree = "<group>"; };
+		905B76C11CAA87390046B67B /* NewsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewCell.m; sourceTree = "<group>"; };
+		905B76C31CAA9B6A0046B67B /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		905B76C41CAA9B6A0046B67B /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		905B76C61CAA9E620046B67B /* ITunesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITunesViewController.h; sourceTree = "<group>"; };
+		905B76C71CAA9E620046B67B /* ITunesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITunesViewController.m; sourceTree = "<group>"; };
 		90877E9D1C898625004F8C52 /* TMKAppTV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TMKAppTV.xcdatamodel; sourceTree = "<group>"; };
 		90877EAC1C89888B004F8C52 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		90877EAD1C89888B004F8C52 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
@@ -199,9 +214,10 @@
 				90D913741C870AB1005E5972 /* Core */,
 				90D913751C870ABE005E5972 /* ViewController */,
 				90877EC41C89C081004F8C52 /* DetailViewController */,
+				909442FC1CA2D7AA00FFF552 /* SearchViewController */,
+				905B76B71CAA7FBC0046B67B /* NewsViewController */,
 				9054FF951C85A285003449B7 /* Info.plist */,
 				9054FF901C85A285003449B7 /* Main.storyboard */,
-				909442FC1CA2D7AA00FFF552 /* SearchViewController */,
 				9054FF871C85A285003449B7 /* Supporting Files */,
 			);
 			path = TMK_AppTV;
@@ -232,6 +248,35 @@
 			children = (
 				905B76B41CAA7ABE0046B67B /* SearchCell.h */,
 				905B76B51CAA7ABE0046B67B /* SearchCell.m */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		905B76B71CAA7FBC0046B67B /* NewsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				905B76BF1CAA871B0046B67B /* cell */,
+				905B76BB1CAA83860046B67B /* newsItem */,
+				905B76B81CAA7FD70046B67B /* NewsViewController.h */,
+				905B76B91CAA7FD70046B67B /* NewsViewController.m */,
+			);
+			path = NewsViewController;
+			sourceTree = "<group>";
+		};
+		905B76BB1CAA83860046B67B /* newsItem */ = {
+			isa = PBXGroup;
+			children = (
+				905B76BC1CAA83A00046B67B /* NewsItem.h */,
+				905B76BD1CAA83A00046B67B /* NewsItem.m */,
+			);
+			path = newsItem;
+			sourceTree = "<group>";
+		};
+		905B76BF1CAA871B0046B67B /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				905B76C01CAA87390046B67B /* NewsViewCell.h */,
+				905B76C11CAA87390046B67B /* NewsViewCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -267,6 +312,10 @@
 				90877EC61C89C0A4004F8C52 /* DetailViewController.m */,
 				90113D1C1CA53F2D00CD26EF /* QRViewController.h */,
 				90113D1D1CA53F2D00CD26EF /* QRViewController.m */,
+				905B76C31CAA9B6A0046B67B /* PhotoViewController.h */,
+				905B76C41CAA9B6A0046B67B /* PhotoViewController.m */,
+				905B76C61CAA9E620046B67B /* ITunesViewController.h */,
+				905B76C71CAA9E620046B67B /* ITunesViewController.m */,
 			);
 			path = DetailViewController;
 			sourceTree = "<group>";
@@ -470,9 +519,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E0E9DE1C96CC3600C6D4AC /* Segment+CoreDataProperties.m in Sources */,
+				905B76BE1CAA83A00046B67B /* NewsItem.m in Sources */,
 				9026B3A61CA162E300A43815 /* YoutubeCell.m in Sources */,
 				9054FF8F1C85A285003449B7 /* ViewController.m in Sources */,
 				909926311C96E74E006A7741 /* ContentViewCell.m in Sources */,
+				905B76C81CAA9E620046B67B /* ITunesViewController.m in Sources */,
 				90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */,
 				905B76B11CA9BBF50046B67B /* XMLDictionary.m in Sources */,
 				90E0E9DD1C96CC3600C6D4AC /* Event.m in Sources */,
@@ -481,6 +532,7 @@
 				904822E71CA00023009EE7C6 /* FlickerCell.m in Sources */,
 				90E0E9E11C96CC3600C6D4AC /* Genre.m in Sources */,
 				904822E41C9FFD79009EE7C6 /* HeaderCell.m in Sources */,
+				905B76C21CAA87390046B67B /* NewsViewCell.m in Sources */,
 				903390F21C98513000B3F729 /* TableViewCell.m in Sources */,
 				90E0E9E01C96CC3600C6D4AC /* Genre+CoreDataProperties.m in Sources */,
 				9054FF8C1C85A285003449B7 /* AppDelegate.m in Sources */,
@@ -496,9 +548,11 @@
 				904822F01CA02A70009EE7C6 /* DescriptionCell.m in Sources */,
 				9054FF891C85A285003449B7 /* main.m in Sources */,
 				904822ED1CA00AF9009EE7C6 /* Venue.m in Sources */,
+				905B76BA1CAA7FD70046B67B /* NewsViewController.m in Sources */,
 				90113CF81CA43BDE00CD26EF /* TextAnalyzer.m in Sources */,
 				90113D1E1CA53F2D00CD26EF /* QRViewController.m in Sources */,
 				905B76B61CAA7ABE0046B67B /* SearchCell.m in Sources */,
+				905B76C51CAA9B6A0046B67B /* PhotoViewController.m in Sources */,
 				90E0E9DC1C96CC3600C6D4AC /* Event+CoreDataProperties.m in Sources */,
 				90E0E9DF1C96CC3600C6D4AC /* Segment.m in Sources */,
 			);

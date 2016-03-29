@@ -101,6 +101,9 @@
     [cell.imageView setImageWithURL:[NSURL URLWithString:item.thumbURL]];
     [cell.textLabel setText:item.title];
     
+    // MFCK ((
+    cell.eventID = item.previewAudioURL;
+    
 //    self.playImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play-video"]];
 //    [cell.contentView addSubview:self.playImageView];
 //    [self.playImageView addConstraintWidth:70 height:70];

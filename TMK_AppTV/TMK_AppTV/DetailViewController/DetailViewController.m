@@ -12,8 +12,9 @@
 #import "FlickerCell.h"
 #import "YoutubeCell.h"
 #import "ITunesCell.h"
-//#import "DescriptionCell.h"
 #import "QRViewController.h"
+#import "PhotoViewController.h"
+#import "ITunesViewController.h"
 #import <UIImageView+AFNetworking.h>
 
 typedef NS_ENUM(NSUInteger, DetailEnumCell) {
@@ -146,10 +147,7 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
 }
 
 
-
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showQR"])
@@ -157,6 +155,24 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
         QRViewController *controlelr = [segue destinationViewController];
         [controlelr setTitle:self.currentEvent.name];
         [controlelr setEventURL:[self.currentEvent.eventURL copy]];
+    }
+    else if ([segue.identifier isEqualToString:@"showPhoto"])
+    {
+        ContentViewCell *cell = sender;
+        
+        PhotoViewController *controlelr = [segue destinationViewController];
+        [controlelr setImage:cell.imageView.image];
+    }
+    else if ([segue.identifier isEqualToString:@"playAudio"])
+    {
+        ContentViewCell *cell = sender;
+        ITunesViewController *controller = segue.destinationViewController;
+        
+        NSDictionary *userInfo = @{@"title": cell.textLabel.text,
+                                   @"image": cell.imageView.image,
+                                   @"url": cell.eventID};
+        
+        [controller setUserInfo:userInfo];
     }
 }
 

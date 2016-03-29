@@ -27,7 +27,6 @@
     dispatch_once(&onceToken, ^{
         
         instance = [[Core alloc] init];
-        [instance rssAtom];
     });
     return instance;
 }
@@ -91,9 +90,9 @@
 }
 
 #pragma mark - RSS
-- (void)rssAtom
+- (void)rssAtomSuccess:(void (^)(id object))successBlock
 {
-    NSURL *url = [NSURL URLWithString:@"http://rss.infongen.com/searches/41ccec69-7827-40d5-a5b3-8e0b60419a8e?format=Rss20&allowExtensions=False&token=ACCTID%3D54784435%26CLID%3D83%26REF%3DDP%26UID%3Devgeny_semenov1%2540epam.com%26ExpiresOn%3D253402300799%26HMACSHA256%3DZdkjdwoyfyTs%252fBCp1ig976a4x5wOnvLk5i6a8lYthTQ%253d"];
+    NSURL *url = [NSURL URLWithString:@"http://rss.infongen.com/searches/6dbdb039-5948-4378-b200-050b1eff8a84?format=Rss20&allowExtensions=False&token=ACCTID%3D54784435%26CLID%3D83%26REF%3DDP%26UID%3Devgeny_semenov1%2540epam.com%26ExpiresOn%3D253402300799%26HMACSHA256%3DZdkjdwoyfyTs%252fBCp1ig976a4x5wOnvLk5i6a8lYthTQ%253d"];
     
     NSData *data = [NSData dataWithContentsOfURL:url];
     
@@ -101,7 +100,10 @@
     
     d = d[@"channel"][@"item"];
     
-    NSLog(@"");
+    if ([d count] > 0 && successBlock)
+    {
+        successBlock(d);
+    }
 
 }
 @end
