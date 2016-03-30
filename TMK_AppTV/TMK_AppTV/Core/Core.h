@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DatabaseManager.h"
+#import "CoreDataManager.h"
 
 @interface Core : NSObject
 @property (nonatomic, strong, readonly) DatabaseManager *databaseManager;

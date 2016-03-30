@@ -9,6 +9,7 @@
 #import "FlickerCell.h"
 #import <FlickrKit.h>
 #import "Core.h"
+#import "TextAnalyzer.h"
 
 
 @interface TableViewCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -23,7 +24,7 @@
 
 + (CGFloat)defHeight
 {
-    return 300;
+    return 400;
 }
 
 - (void)awakeFromNib
@@ -47,18 +48,34 @@
     NSParameterAssert(event);
     
     
-    NSString *tags = [NSString stringWithFormat:@"%@,%@", event.genre, event.name];
-    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
-    tags = [[tags componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@","];
-    tags = [tags stringByReplacingOccurrencesOfString:@",," withString:@""];
+    NSCharacterSet *separetaCharacter = [NSCharacterSet characterSetWithCharactersInString:@"':[],!?"];
+    
+    NSArray *a = [event.name componentsSeparatedByCharactersInSet:separetaCharacter];
+    
+    NSString *name = [a firstObject];
+    if ([name length] > 11)
+    {
+        name = [[name componentsSeparatedByString:@" "] firstObject];
+    }
+    
+    
+    NSString *tags = [[event.name componentsSeparatedByString:@" "] componentsJoinedByString:@","];
+    
+    
+//    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
+//    tags = [[tags componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@","];
+//    tags = [tags stringByReplacingOccurrencesOfString:@",," withString:@""];
+//    
+//    tags = @"Disney";
+    
     
     FlickrKit *fk = [FlickrKit sharedFlickrKit];
     NSDictionary *args = @{@"api_key": fk.apiKey,
-//                           @"text": event.name,
+                           @"text": name,
                            @"tags": tags,
                            @"tag_mode": @"OR",
-                           @"lat": @"34.061128",
-                           @"lon": @"-118.312686",
+//                           @"lat": @"34.061128",
+//                           @"lon": @"-118.312686",
 //                           @"radius": @"32",
                            @"safe_search": @"1"};
     

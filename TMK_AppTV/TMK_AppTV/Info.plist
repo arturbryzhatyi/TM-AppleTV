@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -32,6 +32,13 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TMSans-Bold.ttf</string>
+		<string>TMSans-Italic.ttf</string>
+		<string>TMSans-Light.ttf</string>
+		<string>TMSans-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

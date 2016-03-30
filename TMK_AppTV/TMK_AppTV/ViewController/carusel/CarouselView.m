@@ -150,13 +150,13 @@
         [self.titleLabel setBackgroundColor:[UIColor colorWithRed:0.396 green:0.396 blue:0.396 alpha:.6f]];
         [self.titleLabel setTextColor:[UIColor whiteColor]];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:30]];
+        [self.titleLabel setFont:[UIFont fontWithName:@"TMSans-Regular" size:30]];//[UIFont boldSystemFontOfSize:30]];
         [self addSubview:_titleLabel];
         
         [self.imageView addConstraintFill];
         [self.titleLabel addConstraintFromLeft:0 toRight:0];
         [self.titleLabel addConstraintFromBottom:0];
-        [self.titleLabel addConstraintHeight:40];
+        [self.titleLabel addConstraintHeight:60];
     }
     return self;
 }

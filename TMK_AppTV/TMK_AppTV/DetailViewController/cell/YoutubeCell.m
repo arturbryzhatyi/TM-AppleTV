@@ -29,7 +29,7 @@
 
 + (CGFloat)defHeight
 {
-    return 300;
+    return 400;
 }
 
 - (void)setKeyword:(NSString *)value

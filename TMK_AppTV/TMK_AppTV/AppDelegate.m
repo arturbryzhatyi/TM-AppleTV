@@ -50,7 +50,24 @@
         }
     });
     
+//    [self print];
+    
     return YES;
+}
+
+-(void)print{
+    
+    NSArray * fontfamilyNames=[UIFont familyNames];
+    for(NSString *familyName in fontfamilyNames)
+    {
+        NSLog(@"Font FamilyName : %@",familyName); //*fontfamilyNames
+        
+        for(NSString *fontName in [UIFont fontNamesForFamilyName:familyName])
+        {
+            NSLog(@"\t%@",fontName);         //*font name
+        }
+    }
+    NSLog(@"\n\n\n\n\n");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

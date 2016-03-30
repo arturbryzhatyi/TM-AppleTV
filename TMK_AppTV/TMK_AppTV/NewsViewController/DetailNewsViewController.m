@@ -29,6 +29,8 @@
 
 - (void)configureController
 {
+    self.stringURL = @"http://www.ticketmaster.com/Rihanna-tickets/artist/1013826?tm_link=tm_browse_rc_image1";
+    
     if ([self.stringURL length] > 0)
     {
         NSURL *url = [NSURL URLWithString:self.stringURL];

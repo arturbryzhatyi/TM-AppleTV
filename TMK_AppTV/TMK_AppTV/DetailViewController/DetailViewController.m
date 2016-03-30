@@ -15,7 +15,12 @@
 #import "QRViewController.h"
 #import "PhotoViewController.h"
 #import "ITunesViewController.h"
+#import "DetailNewsViewController.h"
 #import <UIImageView+AFNetworking.h>
+#import <XCDYouTubeKit.h>
+#import <AVKit/AVKit.h>
+
+
 
 typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     
@@ -146,6 +151,29 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     return cell;
 }
 
+- (IBAction)playLiveVideo:(UIButton *)sender
+{
+    [sender setEnabled:NO];
+    
+    NSString *videoID = [CoreDataManager concertIDWithTerm:@"rihanna"];//[CoreDataManager concertIDRandom];
+    
+    [[XCDYouTubeClient defaultClient] getVideoWithIdentifier:videoID completionHandler:^(XCDYouTubeVideo *video, NSError *error) {
+        
+        if (video)
+        {
+            AVPlayerViewController *playerViewController = [AVPlayerViewController new];
+            [self presentViewController:playerViewController animated:YES completion:nil];
+            
+            NSDictionary *streamURLs = video.streamURLs;
+            NSURL *streamURL = streamURLs[@(XCDYouTubeVideoQualityHD720)] ?: streamURLs[@(XCDYouTubeVideoQualityMedium360)];
+            
+            playerViewController.player = [AVPlayer playerWithURL:streamURL];
+            [playerViewController.player play];
+        }
+        
+        [sender setEnabled:YES];
+    }];
+}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -173,6 +201,11 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
                                    @"url": cell.eventID};
         
         [controller setUserInfo:userInfo];
+    }
+    else if ([segue.identifier isEqualToString:@"showWeb"])
+    {
+        DetailNewsViewController *controller = segue.destinationViewController;
+        [controller setStringURL:self.currentEvent.eventURL];
     }
 }
 

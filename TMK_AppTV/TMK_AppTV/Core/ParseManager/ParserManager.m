@@ -48,6 +48,12 @@
                         nEvent.name = value;
                     }
                     
+                    value = object[@"info"];
+                    IfStringValueNotNull(value)
+                    {
+                        nEvent.descript = value;
+                    }
+                    
                     value = object[@"dates"];
                     IfDictionaryValueNotNull(value)
                     {

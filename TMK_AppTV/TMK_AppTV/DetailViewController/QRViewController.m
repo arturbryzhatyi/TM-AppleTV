@@ -30,11 +30,19 @@
 
 - (void)setEventURL:(NSString *)value
 {
+    
+    // hardcode QR
+    _eventURL = @"";
+    value = @"http://www.ticketmaster.com/Rihanna-tickets/artist/1013826?tm_link=tm_browse_rc_image1";
+    
+    
     if (![_eventURL isEqualToString:value])
     {
         _eventURL = value;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+//            NSString *stringURL = [_eventURL stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@":_-&?!"] invertedSet]];
             
             NSString *str = [NSString stringWithFormat:@"https://api.qrserver.com/v1/create-qr-code/?data=%@&size=200x200", _eventURL];
             

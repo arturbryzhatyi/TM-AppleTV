@@ -26,7 +26,7 @@
 
 + (CGFloat)defHeight
 {
-    return 300;
+    return 400;
 }
 
 - (void)setITunesTerm:(NSString *)value

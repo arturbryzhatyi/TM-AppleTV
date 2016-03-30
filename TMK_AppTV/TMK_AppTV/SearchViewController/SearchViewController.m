@@ -12,6 +12,7 @@
 #import "Core.h"
 #import <UIImageView+AFNetworking.h>
 #import "UIView+Constraint.h"
+#import "DetailViewController.h"
 
 @interface SearchViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -119,14 +120,17 @@
     return CGSizeMake(width, height);
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+        if ([segue.identifier isEqualToString:@"searchShowDetail"])
+        {
+            DetailViewController *controller = segue.destinationViewController;
+            
+            [controller setEventID:[(ContentViewCell *)sender eventID]];
+        }
 }
-*/
 
 @end

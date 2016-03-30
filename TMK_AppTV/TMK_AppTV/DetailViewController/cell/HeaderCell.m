@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *leftHeaderLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *qrCodeImageView;
 
+@property (nonatomic, weak) IBOutlet UIButton *liveButton;
+
 @end
 
 @implementation HeaderCell
@@ -54,16 +56,23 @@
     
     NSParameterAssert(event);
     
+    [self.liveButton setHidden:![[event.segment.name lowercaseString] isEqualToString:@"music"]];
+    
     [self.posterImageView setImageWithURL:[event imageURL]];
     [self.titleLabel setText:event.name];
+    
+    if ([event.descript length] > 0)
+    {
+        [self.descriptionLabel setText:event.descript];
+    }
     
     NSInteger count = arc4random() % 100000 + 23;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [self.subTitleLabel setText:[NSString stringWithFormat:@"❤️ %@  %@  %@  2h 30m",
                                  [formatter stringFromNumber:[NSNumber numberWithInteger:count]],
-                                 event.segment.name,
-                                 [event genre]]];
+                                 (event.segment.name.length > 0) ? event.segment.name : @"",
+                                 (event.genre.length > 0) ? event.genre : @""]];
     
     [self setEventLocation:event.venue andDate:event.localDateTime];
 //    [self loadQRWithURL:event.eventURL];
