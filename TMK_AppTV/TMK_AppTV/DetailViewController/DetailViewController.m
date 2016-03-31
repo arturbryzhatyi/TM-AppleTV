@@ -155,8 +155,21 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
 {
     [sender setEnabled:NO];
     
-    NSString *videoID = [CoreDataManager concertIDWithTerm:@"rihanna"];//[CoreDataManager concertIDRandom];
+    NSString *videoID = @"";
     
+    if ([CoreDataManager isRIHANNA:self.currentEvent.name])
+    {
+      videoID = [CoreDataManager concertIDWithTerm:@"rihanna"];
+    }
+    else if ([CoreDataManager isZZTOP:self.currentEvent.name])
+    {
+        videoID = [CoreDataManager concertIDWithTerm:@"zz top"];
+    }
+    else
+    {
+        videoID = [CoreDataManager concertIDRandom];
+    }
+        
     [[XCDYouTubeClient defaultClient] getVideoWithIdentifier:videoID completionHandler:^(XCDYouTubeVideo *video, NSError *error) {
         
         if (video)
@@ -205,7 +218,18 @@ typedef NS_ENUM(NSUInteger, DetailEnumCell) {
     else if ([segue.identifier isEqualToString:@"showWeb"])
     {
         DetailNewsViewController *controller = segue.destinationViewController;
-        [controller setStringURL:self.currentEvent.eventURL];
+        
+        NSString *tmpSTR = [self.currentEvent.eventURL stringByReplacingOccurrencesOfString:@"://" withString:@"://www."];
+        if ([CoreDataManager isZZTOP:self.currentEvent.name])
+        {
+            tmpSTR = @"http://www.ticketmaster.com/zz-top-shreveport-louisiana-04-24-2016/event/1B004F8F2B918BAF?artistid=736523&majorcatid=10001&minorcatid=1";
+        }
+        else if ([CoreDataManager isRIHANNA:self.currentEvent.name])
+        {
+            tmpSTR = @"http://www.ticketmaster.com/Rihanna-tickets/artist/1013826?tm_link=tm_browse_rc_image1";
+        }
+        
+        [controller setStringURL:tmpSTR];
     }
 }
 

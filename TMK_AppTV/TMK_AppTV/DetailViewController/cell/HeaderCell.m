@@ -61,7 +61,11 @@
     [self.posterImageView setImageWithURL:[event imageURL]];
     [self.titleLabel setText:event.name];
     
-    if ([event.descript length] > 0)
+    if ([CoreDataManager isZZTOP:event.name])
+    {
+        [self.descriptionLabel setText:@"ZZ Top is an American rock band that formed in 1969 in Houston, Texas. The band comprises guitarist and lead vocalist Billy Gibbons (the band's leader, main lyricist, and musical arranger), bassist and co-lead vocalist Dusty Hill, and drummer Frank Beard."];
+    }
+    else if ([event.descript length] > 0)
     {
         [self.descriptionLabel setText:event.descript];
     }

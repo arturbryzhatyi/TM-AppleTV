@@ -29,8 +29,6 @@
 
 - (void)configureController
 {
-    self.stringURL = @"http://www.ticketmaster.com/Rihanna-tickets/artist/1013826?tm_link=tm_browse_rc_image1";
-    
     if ([self.stringURL length] > 0)
     {
         NSURL *url = [NSURL URLWithString:self.stringURL];
@@ -40,20 +38,6 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [webview loadRequest:request];
         [self.view addSubview:webview];
-        
-        return;
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        
-        if (data)
-        {
-            NSError *err = nil;
-            NSMutableAttributedString *mAttStr = [[NSMutableAttributedString alloc] initWithData:data
-                                                                                         options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType}
-                                                                              documentAttributes:nil
-                                                                                           error:&err];
-            
-            [self.textView setAttributedText:mAttStr];
-        }
     }
 }
 

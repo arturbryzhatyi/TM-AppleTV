@@ -17,7 +17,8 @@
              @"Rammstein. Live in Nimes": @"UhS5Neq79R8",
              @"Scorpions Acoustica": @"xd70A1RjcIE",
              @"AC/DC live at River Plate full concert 2009": @"Es-3H2btM48",
-             @"Rihanna - Diamonds Live at The Concert For Valor 2014": @"lmPmKezTeiw"};
+             @"Rihanna - Diamonds Live at The Concert For Valor 2014": @"lmPmKezTeiw",
+             @"ZZ TOP Live 'Full concert' FRANCE Nimes 2014": @"2_zd7pOJ8Hc"};
 }
 
  + (NSString *)concertIDRandom
@@ -47,6 +48,32 @@
     }
     
     return result;
+}
+
++ (BOOL)isZZTOP:(NSString *)eventName
+{
+    NSString *tmpStr = [[eventName componentsSeparatedByString:@":"] firstObject];
+    
+    tmpStr = [[tmpStr lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if ([tmpStr isEqualToString:@"zz top"])
+    {
+        return YES;
+    }
+    return NO;
+}
+
++ (BOOL)isRIHANNA:(NSString *)eventName
+{
+    NSString *tmpStr = [[eventName componentsSeparatedByString:@":"] firstObject];
+    
+    tmpStr = [[tmpStr lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if ([[tmpStr lowercaseString] isEqualToString:@"rihanna"])
+    {
+        return YES;
+    }
+    return NO;
 }
 
 @end

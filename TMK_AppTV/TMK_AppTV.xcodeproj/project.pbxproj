@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7BC13840EC30D5F640FD8528 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3376DDED2159C16291D2C62 /* libPods.a */; };
+		900FF2461CAD74A10009AA10 /* SearchTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 900FF2451CAD74A10009AA10 /* SearchTextField.m */; };
 		90113CF81CA43BDE00CD26EF /* TextAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90113CF71CA43BDE00CD26EF /* TextAnalyzer.m */; };
 		90113D1E1CA53F2D00CD26EF /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90113D1D1CA53F2D00CD26EF /* QRViewController.m */; };
 		901614611C96C16500B0870D /* CarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 901614601C96C16500B0870D /* CarouselView.m */; };
@@ -57,6 +58,8 @@
 
 /* Begin PBXFileReference section */
 		808FE9801D8A83548E83BCDD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		900FF2441CAD74A10009AA10 /* SearchTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTextField.h; sourceTree = "<group>"; };
+		900FF2451CAD74A10009AA10 /* SearchTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTextField.m; sourceTree = "<group>"; };
 		90113CF61CA43BDE00CD26EF /* TextAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextAnalyzer.h; sourceTree = "<group>"; };
 		90113CF71CA43BDE00CD26EF /* TextAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextAnalyzer.m; sourceTree = "<group>"; };
 		90113D1C1CA53F2D00CD26EF /* QRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRViewController.h; sourceTree = "<group>"; };
@@ -172,6 +175,15 @@
 				E3376DDED2159C16291D2C62 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		900FF2431CAD74820009AA10 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				900FF2441CAD74A10009AA10 /* SearchTextField.h */,
+				900FF2451CAD74A10009AA10 /* SearchTextField.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		9016145E1C96C14A00B0870D /* carousel */ = {
@@ -351,6 +363,7 @@
 		909442FC1CA2D7AA00FFF552 /* SearchViewController */ = {
 			isa = PBXGroup;
 			children = (
+				900FF2431CAD74820009AA10 /* view */,
 				905B76B31CAA7A9F0046B67B /* cell */,
 				909442FD1CA2D7CD00FFF552 /* SearchViewController.h */,
 				909442FE1CA2D7CD00FFF552 /* SearchViewController.m */,
@@ -571,6 +584,7 @@
 				903390F21C98513000B3F729 /* TableViewCell.m in Sources */,
 				90E0E9E01C96CC3600C6D4AC /* Genre+CoreDataProperties.m in Sources */,
 				9054FF8C1C85A285003449B7 /* AppDelegate.m in Sources */,
+				900FF2461CAD74A10009AA10 /* SearchTextField.m in Sources */,
 				90877EAE1C89888B004F8C52 /* DatabaseManager.m in Sources */,
 				90D913781C870AF0005E5972 /* Core.m in Sources */,
 				901614611C96C16500B0870D /* CarouselView.m in Sources */,

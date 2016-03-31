@@ -10,7 +10,8 @@
 #import "UIView+Constraint.h"
 #import "ParserManager.h"
 
-#import "TextAnalyzer.h"
+//#import "TextAnalyzer.h"
+#import "CoreDataManager.h"
 
 @interface TableViewCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -35,16 +36,27 @@
     
 //    [TextAnalyzer analyze:value];
     
-    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
-    value = [[value componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@" "];
-    
-    value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSArray *components = [value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    components = [components filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
-    
-    value = [components componentsJoinedByString:@"+"];
-    
-    _term = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    if ([CoreDataManager isZZTOP:value])
+    {
+        _term = @"zz+top";
+    }
+    else if ([CoreDataManager isRIHANNA:value])
+    {
+        _term = @"rihanna";
+    }
+    else
+    {
+        NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
+        value = [[value componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@" "];
+        
+        value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSArray *components = [value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        components = [components filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
+        
+        value = [components componentsJoinedByString:@"+"];
+        
+        _term = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         

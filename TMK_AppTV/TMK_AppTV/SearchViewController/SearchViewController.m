@@ -13,9 +13,10 @@
 #import <UIImageView+AFNetworking.h>
 #import "UIView+Constraint.h"
 #import "DetailViewController.h"
+#import "SearchTextField.h"
 
 @interface SearchViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet SearchTextField *textField;
 
 @property (nonatomic, strong) NSArray *objects;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -55,7 +56,35 @@
     }];
 }
 
+
 #pragma mark - Text field delegate
+- (void)textFieldDictation:(id)result
+{
+    if ([result isKindOfClass:[NSArray class]])
+    {
+        NSString *text = @"";
+        NSString *tmp = @"";
+        
+        
+        for (UIDictationPhrase *phrase in result)
+        {
+            tmp = [tmp stringByAppendingString:phrase.text];
+            
+            if ([[phrase.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] > 0)
+            {
+                if ([text length] > 0)
+                {
+                    text = [text stringByAppendingString:@", "];
+                }
+                text = [text stringByAppendingString:phrase.text];
+            }
+        }
+        
+        [self.textField setText:tmp];
+        [self searchWithTerm:text];
+    }
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *term = [textField.text stringByAppendingString:string];

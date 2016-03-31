@@ -136,13 +136,14 @@
 {
     NewsViewCell *nextCell = (NewsViewCell *)[context nextFocusedView];
     [collectionView bringSubviewToFront:nextCell];
-//    [nextCell.contentView layoutIfNeeded];
-//    [nextCell.contentView updateConstraintsIfNeeded];
     
-    nextCell.layer.borderColor = [UIColor blackColor].CGColor;
-    nextCell.layer.borderWidth = 3;
+    if ([context.nextFocusedView isKindOfClass:[NewsViewCell class]])
+    {
+        context.nextFocusedView.layer.borderColor = [UIColor blackColor].CGColor;
+        context.nextFocusedView.layer.borderWidth = 3;
+    }
     
-    if (context.previouslyFocusedView)
+    if (context.previouslyFocusedView && [context.previouslyFocusedView isKindOfClass:[NewsViewCell class]])
     {
         NewsViewCell *previouslyCell = (NewsViewCell *)[context previouslyFocusedView];
         previouslyCell.layer.borderWidth = 0;

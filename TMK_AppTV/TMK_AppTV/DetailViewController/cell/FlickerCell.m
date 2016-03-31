@@ -47,36 +47,40 @@
     
     NSParameterAssert(event);
     
+    NSString *name = @"";
+    NSString *tags = @"";
     
-    NSCharacterSet *separetaCharacter = [NSCharacterSet characterSetWithCharactersInString:@"':[],!?"];
-    
-    NSArray *a = [event.name componentsSeparatedByCharactersInSet:separetaCharacter];
-    
-    NSString *name = [a firstObject];
-    if ([name length] > 11)
+    if ([CoreDataManager isZZTOP:event.name])
     {
-        name = [[name componentsSeparatedByString:@" "] firstObject];
+        name = @"ZZ TOP";
+        tags = @"rock, music, concert";
     }
-    
-    
-    NSString *tags = [[event.name componentsSeparatedByString:@" "] componentsJoinedByString:@","];
-    
-    
-//    NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
-//    tags = [[tags componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@","];
-//    tags = [tags stringByReplacingOccurrencesOfString:@",," withString:@""];
-//    
-//    tags = @"Disney";
-    
+    else if ([CoreDataManager isRIHANNA:event.name])
+    {
+        name = @"rihanna";
+        tags = @"pop, rnb, music, concert";
+    }
+    else
+    {
+        NSCharacterSet *separetaCharacter = [NSCharacterSet characterSetWithCharactersInString:@"':[],!?"];
+        
+        NSArray *a = [event.name componentsSeparatedByCharactersInSet:separetaCharacter];
+        
+        name = [a firstObject];
+        if ([name length] > 11)
+        {
+            name = [[name componentsSeparatedByString:@" "] firstObject];
+        }
+        
+        
+        tags = [[event.name componentsSeparatedByString:@" "] componentsJoinedByString:@","];
+    }
     
     FlickrKit *fk = [FlickrKit sharedFlickrKit];
     NSDictionary *args = @{@"api_key": fk.apiKey,
                            @"text": name,
                            @"tags": tags,
                            @"tag_mode": @"OR",
-//                           @"lat": @"34.061128",
-//                           @"lon": @"-118.312686",
-//                           @"radius": @"32",
                            @"safe_search": @"1"};
     
     [fk call:@"flickr.photos.search" args:args maxCacheAge:FKDUMaxAgeNeverCache completion:^(NSDictionary *response, NSError *error) {

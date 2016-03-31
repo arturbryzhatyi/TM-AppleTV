@@ -12,4 +12,10 @@
 
 + (NSString *)concertIDRandom;
 + (NSString *)concertIDWithTerm:(NSString *)term;
+
+
+// hardcode
++ (BOOL)isZZTOP:(NSString *)eventName;
++ (BOOL)isRIHANNA:(NSString *)eventName;
+
 @end

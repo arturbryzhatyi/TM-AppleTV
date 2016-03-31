@@ -7,6 +7,7 @@
 //
 
 #import "QRViewController.h"
+#import "CoreDataManager.h"
 
 @interface QRViewController ()
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -18,33 +19,43 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self configureController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.titleLabel setText:self.title];
 }
 
-- (void)setEventURL:(NSString *)value
+- (void)configureController
 {
-    
-    // hardcode QR
-    _eventURL = @"";
-    value = @"http://www.ticketmaster.com/Rihanna-tickets/artist/1013826?tm_link=tm_browse_rc_image1";
-    
-    
-    if (![_eventURL isEqualToString:value])
+    [self.titleLabel setText:self.title];
+
+
+    if ([CoreDataManager isZZTOP:self.title])
     {
-        _eventURL = value;
+        [self.qrImagView setImage:[UIImage imageNamed:@"qr_zztop"]];
+    }
+    else if ([CoreDataManager isRIHANNA:self.title])
+    {
+        [self.qrImagView setImage:[UIImage imageNamed:@"qr_rihanna"]];
+    }
+    else
+    {
+        if ([_eventURL length] == 0)
+        {
+            _eventURL = @"http://ticketmaster.ca/";
+        }
+        
+        self.eventURL = [self.eventURL stringByReplacingOccurrencesOfString:@"://" withString:@"://www."];
+        
+        NSLog(@"QR URL: %@", _eventURL);
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
-//            NSString *stringURL = [_eventURL stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@":_-&?!"] invertedSet]];
-            
-            NSString *str = [NSString stringWithFormat:@"https://api.qrserver.com/v1/create-qr-code/?data=%@&size=200x200", _eventURL];
+            NSString *str = [NSString stringWithFormat:@"https://api.qrserver.com/v1/create-qr-code/?data=%@&size=300x300", _eventURL];
             
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:str]];
             
