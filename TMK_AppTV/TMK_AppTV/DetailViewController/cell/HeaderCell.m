@@ -135,9 +135,29 @@
         if ([view isKindOfClass:[UIButton class]])
         {
             [view.layer setCornerRadius:8.f];
-            [(UIButton *)view setBackgroundColor:[UIColor colorWithWhite:0 alpha:.7f]];
+            [(UIButton *)view setBackgroundImage:[HeaderCell imageWithColor:[UIColor colorWithRed:0.000 green:0.612 blue:0.871 alpha:1.00]
+                                                                   andFrame:view.bounds] forState:UIControlStateFocused];
+            [(UIButton *)view setBackgroundImage:[HeaderCell imageWithColor:[UIColor colorWithRed:0.255 green:0.255 blue:0.255 alpha:.7f]
+                                                                   andFrame:view.bounds] forState:UIControlStateNormal];
+            [view.layer setCornerRadius:8.f];
         }
     }
+}
+
+
++ (UIImage *)imageWithColor:(UIColor *)color andFrame:(CGRect)frame
+{
+    CGRect rect = frame;//CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

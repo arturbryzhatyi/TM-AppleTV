@@ -18,5 +18,4 @@
 
 - (void)setImage:(UIImage *)image;
 
-- (void)setFocus:(BOOL)flag;
 @end

@@ -51,35 +51,28 @@
     [self.dateLabel setTextColor:color];
 }
 
-- (void)setFocus:(BOOL)flag
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
 {
-    CGFloat delata = 10;
-    CGRect currFrame = self.frame;
-    CGRect lRect = self.gradient.bounds;
+    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
     
-    if (flag)
+    if (context.nextFocusedView == self)
     {
-        currFrame.origin.x -= delata;
-        currFrame.origin.y -= delata;
-        currFrame.size.height += delata*2;
-        currFrame.size.width += delata*2;
-        lRect.size = currFrame.size;
-        [self.gradient setFrame:lRect];
+        [coordinator addCoordinatedAnimations:^{
+            
+            self.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            [self layoutIfNeeded];
+            
+        } completion:nil];
     }
-    else
+    else if (context.previouslyFocusedView == self)
     {
-        currFrame.origin.x += delata;
-        currFrame.origin.y += delata;
-        currFrame.size.height -= delata*2;
-        currFrame.size.width -= delata*2;
+        [coordinator addCoordinatedAnimations:^{
+            
+            self.transform = CGAffineTransformMakeScale(1, 1);
+            [self layoutIfNeeded];
+            
+        } completion:nil];
     }
-    
-    
-    [UIView animateWithDuration:.2f animations:^{
-    
-        [self setFrame:currFrame];
-    }];
-    
 }
 
 @end

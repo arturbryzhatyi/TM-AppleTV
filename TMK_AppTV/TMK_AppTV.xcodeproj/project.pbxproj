@@ -46,6 +46,7 @@
 		909442FF1CA2D7CD00FFF552 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 909442FE1CA2D7CD00FFF552 /* SearchViewController.m */; };
 		9094F8DC1CBF8FDE00729F9A /* NewsCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094F8DB1CBF8FDE00729F9A /* NewsCarouselView.m */; };
 		9094F8DE1CBFC68B00729F9A /* NewsCarouselItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F8DD1CBFC68B00729F9A /* NewsCarouselItem.xib */; };
+		9094F8E21CBFD97A00729F9A /* TvButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094F8E11CBFD97A00729F9A /* TvButton.m */; };
 		909926311C96E74E006A7741 /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099262F1C96E74E006A7741 /* ContentViewCell.m */; };
 		909926371C97094D006A7741 /* UIView+Constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 909926361C97094D006A7741 /* UIView+Constraint.m */; };
 		90D913781C870AF0005E5972 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913771C870AF0005E5972 /* Core.m */; };
@@ -129,6 +130,8 @@
 		9094F8DA1CBF8FDE00729F9A /* NewsCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCarouselView.h; sourceTree = "<group>"; };
 		9094F8DB1CBF8FDE00729F9A /* NewsCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCarouselView.m; sourceTree = "<group>"; };
 		9094F8DD1CBFC68B00729F9A /* NewsCarouselItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCarouselItem.xib; sourceTree = "<group>"; };
+		9094F8E01CBFD97A00729F9A /* TvButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TvButton.h; sourceTree = "<group>"; };
+		9094F8E11CBFD97A00729F9A /* TvButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TvButton.m; sourceTree = "<group>"; };
 		9099262F1C96E74E006A7741 /* ContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewCell.m; sourceTree = "<group>"; };
 		909926301C96E74E006A7741 /* ContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewCell.h; sourceTree = "<group>"; };
 		909926351C97094D006A7741 /* UIView+Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraint.h"; sourceTree = "<group>"; };
@@ -204,6 +207,7 @@
 		904822E11C9FFD5F009EE7C6 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				9094F8DF1CBFD95D00729F9A /* view */,
 				904822E21C9FFD79009EE7C6 /* HeaderCell.h */,
 				904822E31C9FFD79009EE7C6 /* HeaderCell.m */,
 				904822E51CA00023009EE7C6 /* FlickerCell.h */,
@@ -385,6 +389,15 @@
 				9094F8DD1CBFC68B00729F9A /* NewsCarouselItem.xib */,
 			);
 			path = carousel;
+			sourceTree = "<group>";
+		};
+		9094F8DF1CBFD95D00729F9A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				9094F8E01CBFD97A00729F9A /* TvButton.h */,
+				9094F8E11CBFD97A00729F9A /* TvButton.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		9099262B1C96E456006A7741 /* cell */ = {
@@ -583,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				905B76CB1CAAB5BC0046B67B /* DetailNewsViewController.m in Sources */,
+				9094F8E21CBFD97A00729F9A /* TvButton.m in Sources */,
 				90E0E9DE1C96CC3600C6D4AC /* Segment+CoreDataProperties.m in Sources */,
 				905B76BE1CAA83A00046B67B /* NewsItem.m in Sources */,
 				9026B3A61CA162E300A43815 /* YoutubeCell.m in Sources */,

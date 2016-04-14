@@ -138,19 +138,11 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
-    NewsViewCell *nextCell = (NewsViewCell *)[context nextFocusedView];
-    ;
-    
     if ([context.nextFocusedView isKindOfClass:[NewsViewCell class]])
     {
         [collectionView bringSubviewToFront:context.nextFocusedView];
-        [(NewsViewCell *)context.nextFocusedView setFocus:YES];
     }
     
-    if (context.previouslyFocusedView && [context.previouslyFocusedView isKindOfClass:[NewsViewCell class]])
-    {
-        [(NewsViewCell *)context.previouslyFocusedView setFocus:NO];
-    }
     return YES;
 }
 

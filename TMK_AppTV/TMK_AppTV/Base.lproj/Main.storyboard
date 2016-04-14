@@ -424,7 +424,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sGW-DJ-EQ3">
                                                                 <rect key="frame" x="350" y="365" width="1080" height="80"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bep-Ri-WAs" userLabel="Buy">
+                                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="bep-Ri-WAs" userLabel="Buy" customClass="TvButton">
                                                                         <rect key="frame" x="0.0" y="0.0" width="155" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="80" id="XEy-bG-bqb"/>
@@ -436,7 +436,7 @@
                                                                             <segue destination="kSD-8c-LBf" kind="presentation" identifier="showQR" modalPresentationStyle="pageSheet" modalTransitionStyle="coverVertical" id="OBC-Su-SCc"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fnZ-YK-Fgw" userLabel="web">
+                                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="fnZ-YK-Fgw" userLabel="web" customClass="TvButton">
                                                                         <rect key="frame" x="185" y="0.0" width="155" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="80" id="KSI-BJ-1fp"/>
@@ -448,7 +448,7 @@
                                                                             <segue destination="4us-fZ-rGL" kind="showDetail" identifier="showWeb" id="ztg-a6-Oka"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bOK-ZX-RUg" userLabel="Venue">
+                                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="bOK-ZX-RUg" userLabel="Venue" customClass="TvButton">
                                                                         <rect key="frame" x="370" y="0.0" width="155" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="80" id="Iop-zF-H8y"/>
@@ -457,7 +457,7 @@
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="-15"/>
                                                                         <state key="normal" image="ic-map"/>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="kFL-9J-st3" userLabel="Trailer">
+                                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kFL-9J-st3" userLabel="Trailer" customClass="TvButton">
                                                                         <rect key="frame" x="555" y="0.0" width="155" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="80" id="aOn-4I-jUJ"/>
@@ -466,7 +466,7 @@
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="-15"/>
                                                                         <state key="normal" image="ic-favourites"/>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="9LH-o7-QEq">
+                                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="9LH-o7-QEq" customClass="TvButton">
                                                                         <rect key="frame" x="740" y="0.0" width="155" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="80" id="NYj-sg-dBn"/>
@@ -478,7 +478,7 @@
                                                                             <action selector="playLiveVideo:" destination="gJX-AX-RQ9" eventType="primaryActionTriggered" id="1ml-uK-w9c"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="j10-ah-Nuo" userLabel="More">
+                                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="j10-ah-Nuo" userLabel="More" customClass="TvButton">
                                                                         <rect key="frame" x="925" y="0.0" width="155" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="80" id="EJg-l6-ebK"/>
@@ -1263,11 +1263,11 @@ Cg
                         <viewControllerLayoutGuide type="bottom" id="fUD-E2-glG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vPy-tI-gMd">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGs-Zo-2xh">
-                                <rect key="frame" x="20" y="100" width="1880" height="960"/>
+                                <rect key="frame" x="20" y="100" width="1245" height="960"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -1323,6 +1323,6 @@ Cg
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rku-z7-Wvi"/>
-        <segue reference="Y9U-Zh-Q2i"/>
+        <segue reference="ztg-a6-Oka"/>
     </inferredMetricsTieBreakers>
 </document>
