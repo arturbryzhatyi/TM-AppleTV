@@ -11,9 +11,10 @@
 #import "NewsItem.h"
 #import "NewsViewCell.h"
 #import "DetailNewsViewController.h"
-
+#import "NewsCarouselView.h"
 
 @interface NewsViewController ()
+@property (weak, nonatomic) IBOutlet NewsCarouselView *carouselView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *romashka;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *objects;
@@ -43,9 +44,11 @@
                 
                 if ([mArray count] > 0)
                 {
-                        self.objects = [NSArray arrayWithArray:mArray];
-                        // reload UI
-                        [self.collectionView reloadData];
+                    self.objects = [NSArray arrayWithArray:mArray];
+                    // reload UI
+                    [self.collectionView reloadData];
+                    
+                    [self.carouselView setObjects:self.objects];
                 }
                 
                 [self.romashka stopAnimating];
@@ -91,7 +94,13 @@
     NewsItem *n = self.objects[indexPath.row];
     
     [cell setTitleText:n.newsTitle];
-    [cell.dateLabel setText:n.newsPubDate];
+    
+    if (n.datePub)
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [cell.dateLabel setText:[dateFormatter stringFromDate:n.datePub]];
+    }
     [cell.sourceLabel setText:n.newsSource];
     
     NSError *err = nil;
@@ -114,11 +123,6 @@
          
          (*stop) = YES;
      }];
-    
-    [cell.descriptionLabel setText:mAttStr.string];
-    
-//    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-//    [formater setDateFormat:@"MM/dd/yyyy"];
 }
 
 
@@ -135,18 +139,17 @@
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
     NewsViewCell *nextCell = (NewsViewCell *)[context nextFocusedView];
-    [collectionView bringSubviewToFront:nextCell];
+    ;
     
     if ([context.nextFocusedView isKindOfClass:[NewsViewCell class]])
     {
-        context.nextFocusedView.layer.borderColor = [UIColor blackColor].CGColor;
-        context.nextFocusedView.layer.borderWidth = 3;
+        [collectionView bringSubviewToFront:context.nextFocusedView];
+        [(NewsViewCell *)context.nextFocusedView setFocus:YES];
     }
     
     if (context.previouslyFocusedView && [context.previouslyFocusedView isKindOfClass:[NewsViewCell class]])
     {
-        NewsViewCell *previouslyCell = (NewsViewCell *)[context previouslyFocusedView];
-        previouslyCell.layer.borderWidth = 0;
+        [(NewsViewCell *)context.previouslyFocusedView setFocus:NO];
     }
     return YES;
 }
@@ -164,8 +167,8 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat width = ([UIScreen mainScreen].bounds.size.width / 2) - 105;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height / 3;
+    CGFloat width = 548;//([UIScreen mainScreen].bounds.size.width / 3);
+    CGFloat height = 300;//[UIScreen mainScreen].bounds.size.height / 3;
     return CGSizeMake(width, height);
 }
 

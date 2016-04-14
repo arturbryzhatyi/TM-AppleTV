@@ -44,6 +44,8 @@
 		90877EC71C89C0A4004F8C52 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90877EC61C89C0A4004F8C52 /* DetailViewController.m */; };
 		908993111C888B0A005ABDA3 /* ParserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 908993101C888B0A005ABDA3 /* ParserManager.m */; };
 		909442FF1CA2D7CD00FFF552 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 909442FE1CA2D7CD00FFF552 /* SearchViewController.m */; };
+		9094F8DC1CBF8FDE00729F9A /* NewsCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9094F8DB1CBF8FDE00729F9A /* NewsCarouselView.m */; };
+		9094F8DE1CBFC68B00729F9A /* NewsCarouselItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9094F8DD1CBFC68B00729F9A /* NewsCarouselItem.xib */; };
 		909926311C96E74E006A7741 /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099262F1C96E74E006A7741 /* ContentViewCell.m */; };
 		909926371C97094D006A7741 /* UIView+Constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 909926361C97094D006A7741 /* UIView+Constraint.m */; };
 		90D913781C870AF0005E5972 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D913771C870AF0005E5972 /* Core.m */; };
@@ -124,6 +126,9 @@
 		908993101C888B0A005ABDA3 /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserManager.m; sourceTree = "<group>"; };
 		909442FD1CA2D7CD00FFF552 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		909442FE1CA2D7CD00FFF552 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		9094F8DA1CBF8FDE00729F9A /* NewsCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCarouselView.h; sourceTree = "<group>"; };
+		9094F8DB1CBF8FDE00729F9A /* NewsCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCarouselView.m; sourceTree = "<group>"; };
+		9094F8DD1CBFC68B00729F9A /* NewsCarouselItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCarouselItem.xib; sourceTree = "<group>"; };
 		9099262F1C96E74E006A7741 /* ContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewCell.m; sourceTree = "<group>"; };
 		909926301C96E74E006A7741 /* ContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewCell.h; sourceTree = "<group>"; };
 		909926351C97094D006A7741 /* UIView+Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Constraint.h"; sourceTree = "<group>"; };
@@ -282,6 +287,7 @@
 		905B76B71CAA7FBC0046B67B /* NewsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9094F8D91CBF8FB800729F9A /* carousel */,
 				905B76BF1CAA871B0046B67B /* cell */,
 				905B76BB1CAA83860046B67B /* newsItem */,
 				905B76B81CAA7FD70046B67B /* NewsViewController.h */,
@@ -369,6 +375,16 @@
 				909442FE1CA2D7CD00FFF552 /* SearchViewController.m */,
 			);
 			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		9094F8D91CBF8FB800729F9A /* carousel */ = {
+			isa = PBXGroup;
+			children = (
+				9094F8DA1CBF8FDE00729F9A /* NewsCarouselView.h */,
+				9094F8DB1CBF8FDE00729F9A /* NewsCarouselView.m */,
+				9094F8DD1CBFC68B00729F9A /* NewsCarouselItem.xib */,
+			);
+			path = carousel;
 			sourceTree = "<group>";
 		};
 		9099262B1C96E456006A7741 /* cell */ = {
@@ -501,6 +517,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9094F8DE1CBFC68B00729F9A /* NewsCarouselItem.xib in Resources */,
 				9054FF941C85A285003449B7 /* Assets.xcassets in Resources */,
 				9054FF921C85A285003449B7 /* Main.storyboard in Resources */,
 				905B76D51CABEA420046B67B /* TMSans-Italic.ttf in Resources */,
@@ -603,6 +620,7 @@
 				90113D1E1CA53F2D00CD26EF /* QRViewController.m in Sources */,
 				905B76B61CAA7ABE0046B67B /* SearchCell.m in Sources */,
 				905B76C51CAA9B6A0046B67B /* PhotoViewController.m in Sources */,
+				9094F8DC1CBF8FDE00729F9A /* NewsCarouselView.m in Sources */,
 				90E0E9DC1C96CC3600C6D4AC /* Event+CoreDataProperties.m in Sources */,
 				90E0E9DF1C96CC3600C6D4AC /* Segment.m in Sources */,
 			);

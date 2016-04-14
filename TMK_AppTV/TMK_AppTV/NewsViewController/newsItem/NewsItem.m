@@ -52,6 +52,17 @@
             IfStringValueNotNull(value)
             {
                 self.newsPubDate = value;
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+                [dateFormatter setDateFormat:@"E',' dd MMM yyyy HH:mm:ss 'Z'"];
+                [dateFormatter setLenient:false];
+                [dateFormatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_US_POSIX"]];
+                [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+                NSDate *date = [dateFormatter dateFromString:value];
+                if (date)
+                {
+                    [self setDatePub:date];
+                }
             }
         }
         return self;
@@ -60,4 +71,12 @@
     return nil;
 }
 
+
+- (NSString *)formattedStringDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    return [formatter stringFromDate:self.datePub];
+}
 @end
