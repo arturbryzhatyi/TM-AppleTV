@@ -147,7 +147,7 @@
         [self addSubview:_imageView];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [self.titleLabel setBackgroundColor:[UIColor colorWithRed:0.396 green:0.396 blue:0.396 alpha:.6f]];
+        [self.titleLabel setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.6f]];
         [self.titleLabel setTextColor:[UIColor whiteColor]];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [self.titleLabel setFont:[UIFont fontWithName:@"TMSans-Regular" size:30]];//[UIFont boldSystemFontOfSize:30]];

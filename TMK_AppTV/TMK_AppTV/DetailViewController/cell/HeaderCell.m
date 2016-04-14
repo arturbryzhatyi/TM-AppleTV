@@ -125,8 +125,19 @@
     });
 }
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    NSArray *a = [self.buttonsView arrangedSubviews];
+    for (UIView *view in a)
+    {
+        if ([view isKindOfClass:[UIButton class]])
+        {
+            [view.layer setCornerRadius:8.f];
+            [(UIButton *)view setBackgroundColor:[UIColor colorWithWhite:0 alpha:.7f]];
+        }
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

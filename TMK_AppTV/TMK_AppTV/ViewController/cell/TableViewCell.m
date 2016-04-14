@@ -15,8 +15,9 @@
 
 @implementation TableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -72,7 +73,7 @@
     NSInteger count = arc4random() % 100000 + 23;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    [cell.likesLabel setText:[NSString stringWithFormat:@"❤️ %@", [formatter stringFromNumber:[NSNumber numberWithInteger:count]]]];
+    [cell.likesLabel setText:[NSString stringWithFormat:@"♥︎ %@", [formatter stringFromNumber:[NSNumber numberWithInteger:count]]]];
     
     NSDateFormatter *formater = [[NSDateFormatter alloc] init];
     [formater setDateFormat:@"MM/dd/yyyy"];
@@ -102,10 +103,18 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context
 {
-    ContentViewCell *cell = (ContentViewCell *)[collectionView cellForItemAtIndexPath:context.nextFocusedIndexPath];
-    [collectionView bringSubviewToFront:cell];
-    [cell.contentView layoutIfNeeded];
-    [cell.contentView updateConstraintsIfNeeded];
+    ContentViewCell *nextCell = (ContentViewCell *)[context nextFocusedView];
+    if ([nextCell isKindOfClass:[ContentViewCell class]])
+    {
+        [collectionView bringSubviewToFront:nextCell];
+        nextCell.footerView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    }
+    
+    ContentViewCell *prevCell = (ContentViewCell *)[context previouslyFocusedView];
+    if ([prevCell isKindOfClass:[ContentViewCell class]])
+    {
+        prevCell.footerView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    }
     
     return YES;
 }

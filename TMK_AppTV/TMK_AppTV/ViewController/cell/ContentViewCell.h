@@ -11,6 +11,7 @@
 @interface ContentViewCell : UICollectionViewCell
 @property (nonatomic, strong) NSString *eventID;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
